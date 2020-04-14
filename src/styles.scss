@@ -1,0 +1,196 @@
+//include material theming
+@import '~@angular/material/theming';
+@include mat-core();
+
+$background-light-color:white;
+
+// Define the light theme
+$light-app-primary: mat-palette($mat-light-blue);
+$light-app-accent:  mat-palette($mat-pink, A200, A100, A400);
+$light-app-theme:   mat-light-theme($light-app-primary, $light-app-accent);
+
+$background: map-get($light-app-theme, background);
+$background: map_merge($background, (background: $background-light-color));
+$light-app-theme: map_merge($light-app-theme, (background: $background));
+
+// Include the light theme styles.
+@include angular-material-theme($light-app-theme);
+
+
+// Define an dark theme.
+$dark-primary: mat-palette($mat-light-blue);
+$dark-accent:  mat-palette($mat-amber, A200, A100, A400);
+$dark-warn:    mat-palette($mat-deep-orange);
+$dark-theme:   mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
+
+$background-dark-color:#211f2c;
+
+$background: map-get($dark-theme, background);
+$background: map_merge($background, (background: $background-dark-color));
+$dark-theme: map_merge($dark-theme, (background: $background));
+
+// themes will be switched based on class names, angular will switch classes which will trigger the theme change
+.dark-theme{
+  @include angular-material-theme($dark-theme);
+    .mat-drawer{
+        background-color: #211f2c;
+    }
+    .tab-pane, .nav-tabs, .form-control, .mat-card, .table> thead> tr> th, .table > tbody > tr > td {
+        background-color: #2f2c3e !important;
+    }
+    .table>tbody>tr>td{
+        border-bottom: none !important;
+        color: white !important;
+    }
+    .table > thead > tr > th:last-child {
+       border-bottom-right-radius: 0px !important; 
+    }
+    .table > thead > tr > th:first-child {
+        border-bottom-left-radius: 0px !important; 
+    }
+    .nav-tabs li a:hover span {
+        color: black !important;
+    }
+    .mat-button-toggle-appearance-standard{
+        color: white;
+        background: #211f2c;
+    }
+    .settings_title {
+        color: white !important;
+    }
+    .settings_input{
+        color: white !important;
+    }
+    .user_settings_name{
+        color: white !important;
+    }
+    .title-component{
+        color: white !important;
+    }
+    .mat-dialog-container{
+        background: #211f2c;
+    }
+    .mat-menu-panel{
+        background: #2f2c3e;
+    }
+    .loader{
+        background: #2f2c3e;
+    }
+    .card{
+        background: #2f2c3e;    
+    }
+    mat-form-field{
+        border-bottom: none !important;
+    }
+    .mat-primary, .mat-calendar {
+        border-bottom: 1px solid #2f2c3e !important;
+    }
+    .side_container{
+        border-left: 1px solid #2f2c3e !important;
+    }
+    .doctor_info_sup{
+        border-top: 1px solid #2f2c3e !important;
+    }
+    .mat-drawer-side {
+        border-right: solid 1px rgb(47, 44, 62) !important;
+    }
+
+    label{
+        color: white;
+    }
+    body{
+        color: white !important;
+    }
+    
+}
+
+
+.light-theme{
+  @include angular-material-theme($light-app-theme)
+}
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%;font-family: 'Poppins', sans-serif !important; }
+body { margin: 0; }
+
+
+
+.title-component{
+    display: block;
+    font-weight: bold !important;
+    margin-top: 0px !important;
+    color: #757575;
+    font-size: 21px !important;
+    color: #757575;
+}
+
+
+.loader {
+    position: absolute;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: white;
+    height: 100%;
+    width: 100%;
+}
+
+.table> thead> tr> th, .table > tbody > tr > td{
+    outline: none;
+}
+
+.top-div{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 15px 30px;
+    align-items: center;
+}
+
+.grid-container{
+    margin: 0px 15px 0px 15px;
+}
+
+
+.container {
+    width: 100%;
+    min-height: 100vh;
+    display: -webkit-box;
+    display: flex;
+    flex-wrap: wrap;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    padding: 0;
+    max-width: inherit;
+}
+
+.mat-button-toggle-checked {
+    background-color: mat-color($light-app-primary) !important;
+    color: white !important;
+  }
+
+.mat-calendar{
+    border-bottom: 1px solid #f3f3f3;
+}
+
+.mat-calendar-table-header th {
+    color: #00b2dc;
+    font-weight: bold;
+    font-size: 13px;
+}
+
+.mat-calendar-table-header-divider::after {
+    content: none;
+    position: absolute;
+    top: 0;
+    left: -8px;
+    right: -8px;
+    height: 1px;
+    display: none;
+}
+
+button{
+    outline: none !important;
+}

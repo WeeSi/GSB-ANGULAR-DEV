@@ -1,0 +1,29 @@
+.form-control{
+    width:100%;
+}
+
+.form-control {
+  width: 100%;
+  position: relative;
+  background: #f9fbfc;
+  height: 53px;
+  box-sizing: border-box;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+  outline: none;
+  border: none;
+  box-shadow: none;
+  }
+  
+  input{
+    border: none; 
+    padding-left: 23px;
+    padding-right: 23px;
+  }
+  
+  input:focus{
+    outline: none;
+  
+  }

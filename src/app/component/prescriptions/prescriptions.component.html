@@ -1,0 +1,25 @@
+<div *ngIf="FactureDto != '' ">
+    <div class="top-div" ><h3 class="title-component">{{ title }}</h3></div>
+    <div class="grid-container">
+      <div class="tablecontent">
+    <app-facturetable></app-facturetable>
+    </div>
+  </div>
+</div>
+
+
+<div *ngIf="FactureDto == '' ">
+    <div style="height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: -webkit-fill-available;">
+    <div style="text-align: center;">
+      <img src="http://localhost:4200/assets/mirage-list-is-empty.png" style="width: 400px;" alt="">
+      <h5 style="font-weight: bold;margin-top: 0;">Oh non!</h5>
+      <p style="margin-bottom: 0;margin-top: 0;">Votre liste est vide,</p>
+      <p style="margin-top: 0;">cliquer sur le bouton pour ajouter une facture.</p>
+     <button *ngIf="role === 'Admin'" class="add-button-alt" mat-flat-button color="primary" style="display: block;margin:auto" (click)="addFacture()">Ajouter une facture</button>
+    </div>
+    </div>
+  </div>

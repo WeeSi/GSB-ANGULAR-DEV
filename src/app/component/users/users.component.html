@@ -1,0 +1,15 @@
+<div style="position: relative;">
+    <div *ngIf="loading" class="loader" >
+    <mat-spinner diameter="50"></mat-spinner>
+</div>
+<div class="top-div" >
+
+    <h3 class="title-component">{{ title }}</h3>
+     <button *ngIf="role === 'Admin'" mat-flat-button color="primary" (click)="addUsers()">Ajouter un utilisateur</button>
+</div>
+<div class="grid-container">
+    
+    <div class="tablecontent">
+<app-users-table></app-users-table>
+</div>
+</div>
