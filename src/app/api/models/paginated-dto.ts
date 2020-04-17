@@ -1,5 +1,5 @@
 /* tslint:disable */
 export interface PaginatedDto {
-  elements: Array<string>;
+  elements: any;
   nbElements: number;
 }

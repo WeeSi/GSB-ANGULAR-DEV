@@ -18,6 +18,9 @@ import { TableComponent } from './component/table/medecintable/table.component';
 import { UsersComponent } from './component/users/users.component';
 import { UsersTableComponent } from './component/table/users-table/users-table.component';
 import { FicheUserComponent } from './component/fiche-user/user.component';
+import { MeetingComponent } from './component/meeting/meeting.component';
+import { BillComponent } from './component/bill/bill.component';
+import { MedicinesComponent } from './component/medicines/medicines.component';
 
 
 
@@ -34,16 +37,19 @@ const routes: Routes = [
       { path : 'table', component : TableComponent},
       ]
     },
-    { path : 'medecins/user/:id', component : MedecinUserComponent},
+    { path : 'commercial/user/:id', component : MedecinUserComponent},
     { path : 'users/user/:id', component : FicheUserComponent},
     { path : 'users', component: UsersComponent, children : [
       { path : 'table', component : UsersTableComponent},
       ],
     },
-    { path : 'patients', component : PatiensComponent },
+    { path : 'commercials', component : PatiensComponent },
     { path : 'medicaments', component : MedicamentsComponent },
-    { path : 'prescriptions', component : PrescriptionsComponent },
+    { path : 'bills', component : PrescriptionsComponent },
     { path : 'profil', component : ProfilComponent },
+    { path : 'user/meetings', component : MeetingComponent },
+    { path : 'user/bills', component : BillComponent },
+    { path : 'user/medicines', component : MedicinesComponent },
     // { path : 'signup', component: SignupComponent, canActivate: [RoleGuardService],  data: {
     //   expectedRole: 'Admin'
     //   }

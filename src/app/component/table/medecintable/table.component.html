@@ -7,7 +7,6 @@
               <th style=" width: 34px;" class="sorting" tabindex="0" aria-controls="dtBasicExample" rowspan="1" colspan="1" aria-label="ID: activate to sort column ascending">Prénom</th>
               <th style=" width: 48px;" class="sorting" tabindex="0" aria-controls="dtBasicExample" rowspan="1" colspan="1" aria-label="Email: activate to sort column ascending">Nom</th>
               <th style=" width: 62px;" class="sorting" tabindex="0" aria-controls="dtBasicExample" rowspan="1" colspan="1" aria-label="Email: activate to sort column ascending">Adresse</th>
-              <th style="width:15px" class="sorting" tabindex="0" aria-controls="dtBasicExample" rowspan="1" colspan="1" aria-label="Email: activate to sort column ascending"></th>
             <!--  <th style="color: #757575; width: 261px;" class="sorting" tabindex="0" aria-controls="dtBasicExample" rowspan="1" colspan="1" aria-label="Email: activate to sort column ascending"></th>
               <th style="color: #757575; width: 261px;" class="sorting" tabindex="0" aria-controls="dtBasicExample" rowspan="1" colspan="1" aria-label="Email: activate to sort column ascending"></th>
               -->
@@ -24,7 +23,6 @@
                   <td class="uid">{{ list.firstName }}</td>
                   <td> <span class="name"></span>{{ list.lastName }}</td>
                   <td> <span class="name"></span>{{ list.address }}</td>
-                  <td> <span class="name" [routerLink]="['/medecins/user', list.id ]" style="cursor: pointer;"><mat-icon>chevron_right</mat-icon></span></td>
                 <!--  <td> <span class="name"></span><button mat-raised-button color="primary" [routerLink]="['/medecins/user', list.id ]">Voir</button></td>
                   <td> <span class="name"></span><button mat-raised-button color="warn" (click)="deleteUser(list.id)">Supprimer</button></td>-->
               </tr>

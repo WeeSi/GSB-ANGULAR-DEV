@@ -74,11 +74,11 @@ export class DashboardComponent {
     this.navService.show();
     this.theme.setDefaultTheme();
 
-    this.userService.getUser().pipe(
-      map(response => response),
-      tap(users =>  users)
-    )
-    .subscribe(users => this.Users = users);
+    // this.userService.getUser().pipe(
+    //   map(response => response),
+    //   tap(users =>  users)
+    // )
+    // .subscribe(users => this.Users = users);
 }
 
 }

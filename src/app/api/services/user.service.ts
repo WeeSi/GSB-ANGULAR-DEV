@@ -32,12 +32,26 @@ class UserService extends __BaseService {
   }
 
   /**
+   * @param params The `UserService.GetUserParams` containing the following parameters:
+   *
+   * - `role`: role to retrieve
+   *
+   * - `name`: Name to retrieve
+   *
+   * - `lastname`: Lastname to retrieve
+   *
+   * - `email`: Email to retrieve
+   *
    * @return All users
    */
-  getUserResponse(): __Observable<__StrictHttpResponse<Array<UserDto>>> {
+  getUserResponse(params: UserService.GetUserParams): __Observable<__StrictHttpResponse<Array<UserDto>>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
+    if (params.role != null) __params = __params.set('role', params.role.toString());
+    if (params.name != null) __params = __params.set('name', params.name.toString());
+    if (params.lastname != null) __params = __params.set('lastname', params.lastname.toString());
+    if (params.email != null) __params = __params.set('email', params.email.toString());
     let req = new HttpRequest<any>(
       'GET',
       this.rootUrl + `/user`,
@@ -56,10 +70,20 @@ class UserService extends __BaseService {
     );
   }
   /**
+   * @param params The `UserService.GetUserParams` containing the following parameters:
+   *
+   * - `role`: role to retrieve
+   *
+   * - `name`: Name to retrieve
+   *
+   * - `lastname`: Lastname to retrieve
+   *
+   * - `email`: Email to retrieve
+   *
    * @return All users
    */
-  getUser(): __Observable<Array<UserDto>> {
-    return this.getUserResponse().pipe(
+  getUser(params: UserService.GetUserParams): __Observable<Array<UserDto>> {
+    return this.getUserResponse(params).pipe(
       __map(_r => _r.body as Array<UserDto>)
     );
   }
@@ -365,6 +389,32 @@ class UserService extends __BaseService {
 }
 
 module UserService {
+
+  /**
+   * Parameters for getUser
+   */
+  export interface GetUserParams {
+
+    /**
+     * role to retrieve
+     */
+    role: number;
+
+    /**
+     * Name to retrieve
+     */
+    name: string;
+
+    /**
+     * Lastname to retrieve
+     */
+    lastname: string;
+
+    /**
+     * Email to retrieve
+     */
+    email: string;
+  }
 
   /**
    * Parameters for postUserId

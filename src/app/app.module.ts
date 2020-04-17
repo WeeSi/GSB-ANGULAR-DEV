@@ -53,6 +53,11 @@ import { AddmedicamentComponent } from './component/addmedicament/addmedicament.
 import { AddFactureComponent } from './component/add-facture/add-facture.component';
 import { FacturetableComponent } from './component/table/facturetable/facturetable.component';
 import { UpdatefactureComponent } from './component/table/updatefacture/updatefacture.component';
+import { CommercialtableComponent } from './component/table/commercialtable/commercialtable.component';
+import { SearchEnumComponent } from './component/search-enum/search-enum.component';
+import { MeetingComponent } from './component/meeting/meeting.component';
+import { BillComponent } from './component/bill/bill.component';
+import { MedicinesComponent } from './component/medicines/medicines.component';
 
 
 
@@ -81,6 +86,11 @@ import { UpdatefactureComponent } from './component/table/updatefacture/updatefa
     AddFactureComponent,
     FacturetableComponent,
     UpdatefactureComponent,
+    CommercialtableComponent,
+    SearchEnumComponent,
+    MeetingComponent,
+    BillComponent,
+    MedicinesComponent,
   ],
   imports: [
     BrowserModule,

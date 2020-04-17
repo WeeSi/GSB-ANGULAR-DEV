@@ -2,10 +2,10 @@
 @import '~@angular/material/theming';
 @include mat-core();
 
-$background-light-color:white;
+$background-light-color:#edeef5;
 
 // Define the light theme
-$light-app-primary: mat-palette($mat-light-blue);
+$light-app-primary: mat-palette($mat-cyan, 500);
 $light-app-accent:  mat-palette($mat-pink, A200, A100, A400);
 $light-app-theme:   mat-light-theme($light-app-primary, $light-app-accent);
 
@@ -18,12 +18,12 @@ $light-app-theme: map_merge($light-app-theme, (background: $background));
 
 
 // Define an dark theme.
-$dark-primary: mat-palette($mat-light-blue);
+$dark-primary: mat-palette($mat-light-blue,300);
 $dark-accent:  mat-palette($mat-amber, A200, A100, A400);
 $dark-warn:    mat-palette($mat-deep-orange);
 $dark-theme:   mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
 
-$background-dark-color:#211f2c;
+$background-dark-color:#151419;
 
 $background: map-get($dark-theme, background);
 $background: map_merge($background, (background: $background-dark-color));
@@ -33,10 +33,14 @@ $dark-theme: map_merge($dark-theme, (background: $background));
 .dark-theme{
   @include angular-material-theme($dark-theme);
     .mat-drawer{
-        background-color: #211f2c;
+        background-color: #151419;
+        border-right: none !important;
     }
-    .tab-pane, .nav-tabs, .form-control, .mat-card, .table> thead> tr> th, .table > tbody > tr > td {
-        background-color: #2f2c3e !important;
+    .tab-pane,.nav-tabs{
+       background-color: #15171b !important;
+    }
+    .form-control, .mat-card, .table> thead> tr> th, .table > tbody > tr > td {
+        background-color: #1a1c20 !important;
     }
     .table>tbody>tr>td{
         border-bottom: none !important;
@@ -53,7 +57,7 @@ $dark-theme: map_merge($dark-theme, (background: $background));
     }
     .mat-button-toggle-appearance-standard{
         color: white;
-        background: #211f2c;
+        background: #151419;
     }
     .settings_title {
         color: white !important;
@@ -68,31 +72,34 @@ $dark-theme: map_merge($dark-theme, (background: $background));
         color: white !important;
     }
     .mat-dialog-container{
-        background: #211f2c;
+        background: #151419;
     }
     .mat-menu-panel{
-        background: #2f2c3e;
+        background: #1a1c20;
     }
     .loader{
-        background: #2f2c3e;
+        background: #1a1c20;
     }
     .card{
-        background: #2f2c3e;    
+        box-shadow: unset;
+        background: #15171b !important;
     }
     mat-form-field{
         border-bottom: none !important;
     }
     .mat-primary, .mat-calendar {
-        border-bottom: 1px solid #2f2c3e !important;
+        border-bottom: 1px solid #27292d !important;
     }
     .side_container{
-        border-left: 1px solid #2f2c3e !important;
+        border-left: 1px solid #27292d !important
     }
     .doctor_info_sup{
-        border-top: 1px solid #2f2c3e !important;
+        border-top: 1px solid #27292d !important;
     }
-    .mat-drawer-side {
-        border-right: solid 1px rgb(47, 44, 62) !important;
+
+    .mat-sidenav-content{
+       background: #1a1c20;
+       border-left: 1px solid #27292d;
     }
 
     label{
@@ -101,12 +108,114 @@ $dark-theme: map_merge($dark-theme, (background: $background));
     body{
         color: white !important;
     }
+    .is-active .mat-list-item-content{
+        background: #1e1d24 !important;
+        border: 1px solid #27292d;
+    }
+    .mat-nav-list .mat-list-item:hover {
+        background: none !important;
+      }
+      .is-active .mat-list-item-content:hover{
+        color: #03abd6 !important
+    }
+    .mat-list-item-content:hover{
+        color: white !important
+    }
+    .form-control{
+        background-color: #27262d !important;
+        color:white !important;
+    }
+    .form-control:hover{
+    border-color: rgb(79, 195, 247);
+    -webkit-box-shadow :0 0 0 3px rgba(13, 169, 214, 0.27);
+    box-shadow: 0 0 0 3px rgba(13, 169, 214, 0.27);
+    border: 1px solid transparent;
     
+    }
+    .form-control:focus{
+        border-color: #caefff;
+        box-shadow: 0 0 0 3px rgba(13, 169, 214, 0.27);
+        border: 1px solid #1fbaff75 !important;
+        background-color: #1e1d24 !important;
+    }
+
+    a#role:active {
+        border-color: #caefff;
+        box-shadow: 0 0 0 3px rgba(13, 169, 214, 0.27);
+        border: 1px solid #1fbaff75 !important;
+        background-color: #1e1d24 !important;
+    }
+
+    .searchIcon{
+        filter: invert(0.8) sepia(0) saturate(0) hue-rotate(0deg);
+    }
+    .divider{
+        background: rgb(41, 40, 45);
+    }
+    ::placeholder{
+        color: white !important;
+    }
+    
+}
+  
+.mat-list-item-content:hover{
+    background: #03abd6;
+    color: white;
+    transition: 0.3s all ease;
+}
+
+.light-theme{
+  @include angular-material-theme($light-app-theme);
+  
+  .mat-drawer{
+      background: #edeef5 !important;
+  }
+  .mat-sidenav-content{
+      background: #f4f6fa !important;
+      border-left:1px solid #e2e2e2;
+  }
+  .is-active .mat-list-item-content{
+    background: #03abd6 !important;
+    border: 1px solid #03abd6;
+    color: white;
+}
+.tab-pane, .nav-tabs{
+    background: white;
+}
+
+.mat-list-item:hover{
+    background: none !important;
 }
 
 
-.light-theme{
-  @include angular-material-theme($light-app-theme)
+.form-control:hover{
+    background-color: #fff !important;
+    border-color: rgba(0,0,0,0.1);
+    -webkit-box-shadow: 0 0 0 4px rgba(234,76,137,0.1);
+    box-shadow: 0 0 0 4px rgba(3, 171, 214, 0.23);
+    border: 1px solid #0000000a;
+}
+
+.form-control:focus{
+    background-color: #fff !important;
+    border-color: rgba(0,0,0,0.1);
+    -webkit-box-shadow: 0 0 0 4px rgba(234,76,137,0.1);
+    box-shadow: 0 0 0 4px rgba(3, 171, 214, 0.23);
+    border: 1px solid #03abd6;
+}
+
+.contentFilter div label{
+    color: #0d0c22;
+}
+
+.searchIcon{
+    filter: invert(0.5) sepia(0) saturate(0) hue-rotate(0deg);
+}
+
+.divider{
+    background: rgb(211, 212, 223);
+}
+
 }
 /* You can add global styles to this file, and also import other style files */
 
@@ -114,13 +223,16 @@ html, body { height: 100%;font-family: 'Poppins', sans-serif !important; }
 body { margin: 0; }
 
 
+.mat-drawer{
+    border: none !important;
+}
 
 .title-component{
     display: block;
     font-weight: bold !important;
     margin-top: 0px !important;
     color: #757575;
-    font-size: 21px !important;
+    font-size: 20px !important;
     color: #757575;
 }
 
@@ -136,6 +248,10 @@ body { margin: 0; }
     width: 100%;
 }
 
+.mat-button-wrapper{
+    vertical-align: middle;
+}
+
 .table> thead> tr> th, .table > tbody > tr > td{
     outline: none;
 }
@@ -143,7 +259,7 @@ body { margin: 0; }
 .top-div{
     display: flex;
     justify-content: space-between;
-    padding: 10px 15px 30px;
+    padding: 20px 15px 30px;
     align-items: center;
 }
 
@@ -164,6 +280,12 @@ body { margin: 0; }
     align-items: center;
     padding: 0;
     max-width: inherit;
+}
+
+.mat-list-item-content{
+    border-radius: 10px;
+    margin-right: 10px;
+    margin-left: 10px;
 }
 
 .mat-button-toggle-checked {
@@ -189,6 +311,78 @@ body { margin: 0; }
     right: -8px;
     height: 1px;
     display: none;
+}
+
+.contentFilter{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0px -15px;
+    margin-bottom: 30px;
+}
+
+.contentFilter .filterSearch{
+    flex: 1;
+    margin: 0 16px;
+}
+
+.searchIcon{
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    height: 16px;
+    width: 16px;
+    left: 16px;
+}
+
+.form-control{
+    box-sizing: border-box;
+    height: 40px;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.contentFilter div label{
+    font-size: 14px;
+    font-weight: 500;
+    -webkit-transition: background-color 200ms ease, outline 200ms ease, color 200ms ease, -webkit-box-shadow 200ms ease;
+    transition: background-color 200ms ease, outline 200ms ease, color 200ms ease, -webkit-box-shadow 200ms ease;
+    transition: background-color 200ms ease, outline 200ms ease, color 200ms ease, box-shadow 200ms ease;
+    transition: background-color 200ms ease, outline 200ms ease, color 200ms ease, box-shadow 200ms ease, -webkit-box-shadow 200ms ease;
+}
+
+.mat-sidenav-content{
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+ }
+
+ .mat-flat-button{
+     border-radius:8px !important;
+ }
+
+ .form-control {
+    width: 100%;
+    position: relative;
+    background-color: #e8eaf0;
+    box-sizing: border-box;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    outline: none;
+    border: none;
+    box-shadow: none;
+}
+
+.divider{
+    height: 2px;
+    margin:10px;
+}
+
+.card{
+    border-radius: 15px !important;
 }
 
 button{

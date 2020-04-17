@@ -1,12 +1,9 @@
 /* tslint:disable */
+import { UserDto } from './user-dto';
 export interface FactureDto {
-  commercialId: number;
+  commercialId: UserDto;
   date: string;
-  description: string;
+  doctor: UserDto;
   id: number;
-  nombre_kilometre: number;
-  prix_hotel: number;
-  prix_repas: number;
-  prix_transport: number;
-  valid: number;
+  orders: number;
 }

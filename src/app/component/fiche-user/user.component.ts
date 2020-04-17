@@ -4,6 +4,7 @@ import { UserService } from 'src/app/api/services/user.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Route } from '@angular/compiler/src/core';
 import { RoleService } from 'src/app/services/role.service';
+import { ProfilComponent } from '../profil/profil.component';
 
 @Component({
   selector: 'app-user',
@@ -17,6 +18,7 @@ export class FicheUserComponent implements OnInit {
     private route: ActivatedRoute,
     private readonly roleService: RoleService,
     public router: Router,
+    private theme : ProfilComponent
   ) { }
 
   private role: any;
@@ -29,6 +31,7 @@ export class FicheUserComponent implements OnInit {
     });
     this.userService.getUserMe().subscribe(user => this.User.push(user));
     this.role = this.roleService.getRole();
+    this.theme.setDefaultTheme();
   }
 
   deleteUser(){

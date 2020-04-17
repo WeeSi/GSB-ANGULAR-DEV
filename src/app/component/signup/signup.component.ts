@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
-import { SignupService } from './signup.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RoleEnum } from 'src/app/enum/role.enum';
 import { GenderEnum } from 'src/app/enum/gender.enum';

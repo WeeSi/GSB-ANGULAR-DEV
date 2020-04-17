@@ -24,7 +24,7 @@ export class PrescriptionsComponent implements OnInit {
               private theme : ProfilComponent,
               ) { }
 
-              title = "Notes de frais";
+              title = "Factures";
 
   private FactureDto: FactureDto[] = [];
 

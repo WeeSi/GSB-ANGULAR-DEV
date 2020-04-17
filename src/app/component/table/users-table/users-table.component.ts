@@ -23,8 +23,6 @@ export class UsersTableComponent implements OnInit {
               ) { }
 searchTerm: string;
 
-title = 'Medecins';
-
 Users: UserDto[] = [];
 selection = new SelectionModel<UserDto>(true, []);
 dataSource = new MatTableDataSource<UserDto>(this.Users);
@@ -36,14 +34,14 @@ paginatorInfo: PageEvent = {pageSize: 5, pageIndex: 0, length: this.Users.length
 ngOnInit() {
 // this.searchb.show();
 // tslint:disable-next-line: max-line-length
-this.userService.getUser().subscribe(users => {
-this.Users = users as UserDto[],
-this.displayedUsers = this.Users;
-this.paginatorInfo.length = this.displayedUsers.length;
-// this.displayedUsers = this.paginateElements<UserDto>(this.Users, this.paginatorInfo);
-// tslint:disable-next-line: max-line-length
-this.displayedUsers = this.paginateElements<UserDto>(this.displayedUsers, this.paginatorInfo); // On pagine nos éléments qui correspondent à la recherche
-});
+// this.userService.getUser().subscribe(users => {
+// this.Users = users as UserDto[],
+// this.displayedUsers = this.Users;
+// this.paginatorInfo.length = this.displayedUsers.length;
+// // this.displayedUsers = this.paginateElements<UserDto>(this.Users, this.paginatorInfo);
+// // tslint:disable-next-line: max-line-length
+// this.displayedUsers = this.paginateElements<UserDto>(this.displayedUsers, this.paginatorInfo); // On pagine nos éléments qui correspondent à la recherche
+// });
 }
 
 // Méthode déclenchée lorsqu'une recherche est faite dans notre composant de recherche

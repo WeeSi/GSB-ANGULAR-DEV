@@ -13,3 +13,6 @@ export { UpdateFactureDto } from './models/update-facture-dto';
 export { MeetingDto } from './models/meeting-dto';
 export { HoursDto } from './models/hours-dto';
 export { CreateMeetingDto } from './models/create-meeting-dto';
+export { OrderDto } from './models/order-dto';
+export { CreatOrderDto } from './models/creat-order-dto';
+export { Order } from './models/order';

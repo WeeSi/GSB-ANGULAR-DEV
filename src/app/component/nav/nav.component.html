@@ -8,9 +8,14 @@
     <mat-nav-list *ngFor=" let list of navList; let i = index;">
       <a mat-list-item [routerLink]="list.rout" *ngIf="list.role.includes(role)" routerLinkActive="is-active" ><mat-icon>{{ list.icon }}</mat-icon>{{ list.name }}</a>
     </mat-nav-list>
+
+    <div class="divider"> </div >
+      <mat-nav-list *ngFor=" let list of navList1; let i = index;">
+        <a mat-list-item [routerLink]="list.rout" *ngIf="list.role.includes(role)" routerLinkActive="is-active" ><mat-icon>{{ list.icon }}</mat-icon>{{ list.name }}</a>
+      </mat-nav-list>
   </div>
   </mat-sidenav>
-  <mat-sidenav-content [ngClass]="{'overflow-hidden' : router.url.includes('medecins/user')}" *ngFor="let user of UserDto">
+  <mat-sidenav-content [ngClass]="{'overflow-hidden' : router.url.includes('commercial/user')}" *ngFor="let user of UserDto">
      
         <mat-toolbar color="primary">
           <div class="top_container">

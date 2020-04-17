@@ -36,7 +36,7 @@
       </div>
       <button mat-flat-button color="warn" *ngIf="role === 'Commercial' || role === 'Admin'" (click)="deleteMedicament(list.id)" >Supprimer</button>
       <button mat-flat-button color="primary" *ngIf="role === 'Commercial' || role === 'Admin'" (click)="openDialog(list.id)" style="margin-left:10px" >Modifier</button>
-      <button mat-flat-button color="primary" (click)="openDialog(list.id)" style="margin-left:10px" >Acheter</button>
+      <button mat-flat-button color="primary" *ngIf="role === 'Doctor' || role === 'Admin'" (click)="buyMedicine(list.id)" style="margin-left:10px" >Acheter</button>
       </div>
     </div>
   </div>

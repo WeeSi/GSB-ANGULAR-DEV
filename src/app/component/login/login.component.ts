@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
           // decode the token to get its payload
           const tokenPayload = decode(tokens);
 
-          if (tokenPayload['role'] === 'Admin') { this.router.navigate(['users']); } else { this.router.navigate(['patients']); }
+          if (tokenPayload['role'] === 'Admin') { this.router.navigate(['users']); } else { this.router.navigate(['commercials']); }
 
         },
         error => this.snackBar.open(error.status === 401 ? error.error.message : 'Email incorrect.', 'OK', this.snackConfig)

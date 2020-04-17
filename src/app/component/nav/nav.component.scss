@@ -45,12 +45,12 @@
 
 .mat-toolbar.mat-primary {
   background: transparent;
-  color:#737373;
-  border-bottom: 1px solid #f3f3f3;
+  color:#93959d;
+  border-bottom: 1px solid #dadbe4
 }
 
 .mat-list-base .mat-list-item {
-  color: rgb(165, 168, 175)
+  color: #91949c;
 }
 
 .mat-list-content{
@@ -70,27 +70,16 @@
 }
 
 .is-active{
-  // background: #75bcd926;
-  color:#75bcd9 !important;
+  color:#03abd6 !important;
 }
 
 
-.is-active::before{
-  content:"";
-  width: 3.2px;
-  height: 48px;
-  display: block;
-  position: absolute;
-  background: #00b2dc;
-  border-top-right-radius: 125px;
-  border-bottom-right-radius: 125px;
-}
 .is-active:focus{
-  background: transparent;
+  background: none !important;
 }
 
 .is-active:hover{
-  background: #75bcd926;
+  background: none !important;
 }
 .mat-list-base .mat-list-item {
   font-size: 15px;

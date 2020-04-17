@@ -19,6 +19,7 @@ class FacturesService extends __BaseService {
   static readonly getFacturesIdPath = '/factures/{id}';
   static readonly postFacturesIdPath = '/factures/{id}';
   static readonly deleteFacturesIdPath = '/factures/{id}';
+  static readonly getFacturesDoctorIdPath = '/factures/doctor/{id}';
 
   constructor(
     config: __Configuration,
@@ -210,6 +211,42 @@ class FacturesService extends __BaseService {
   deleteFacturesId(id: number): __Observable<null> {
     return this.deleteFacturesIdResponse(id).pipe(
       __map(_r => _r.body as null)
+    );
+  }
+
+  /**
+   * @param id Facture from doctorId to retrieve
+   * @return Facture found
+   */
+  getFacturesDoctorIdResponse(id: number): __Observable<__StrictHttpResponse<FactureDto>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+
+    let req = new HttpRequest<any>(
+      'GET',
+      this.rootUrl + `/factures/doctor/${encodeURIComponent(id)}`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<FactureDto>;
+      })
+    );
+  }
+  /**
+   * @param id Facture from doctorId to retrieve
+   * @return Facture found
+   */
+  getFacturesDoctorId(id: number): __Observable<FactureDto> {
+    return this.getFacturesDoctorIdResponse(id).pipe(
+      __map(_r => _r.body as FactureDto)
     );
   }
 }

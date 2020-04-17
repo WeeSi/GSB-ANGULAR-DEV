@@ -34,29 +34,28 @@ export class AddFactureComponent implements OnInit {
   ngOnInit() {
   }
 
-  add(){
-    if (this.formInput.valid) {
-      // tslint:disable-next-line: one-variable-per-declaration
-      const factureToCreate: CreateFactureDto = {
-        date: this.formInput.value.date,
-        description: this.formInput.value.description,
-        prix_hotel: this.formInput.value.prix_hotel,
-        prix_repas: this.formInput.value.prix_repas,
-        nombre_kilometre: this.formInput.value.nombre_kilometre,
-        prix_transport: this.formInput.value.prix_transport,
-      };
-      this.factureService.putFactures(factureToCreate).toPromise().then(
-        () => {
-          this.dialogRef.close();
-          this.snackBar.open('Votre facture à été crée', 'OK', this.snackConfig);
-        },
+  // add(){
+  //   if (this.formInput.valid) {
+  //     // tslint:disable-next-line: one-variable-per-declaration
+  //     const factureToCreate: CreateFactureDto = {
+  //       date: this.formInput.value.date,
+  //       prix_hotel: this.formInput.value.prix_hotel,
+  //       prix_repas: this.formInput.value.prix_repas,
+  //       nombre_kilometre: this.formInput.value.nombre_kilometre,
+  //       prix_transport: this.formInput.value.prix_transport,
+  //     };
+  //     this.factureService.putFactures(factureToCreate).toPromise().then(
+  //       () => {
+  //         this.dialogRef.close();
+  //         this.snackBar.open('Votre facture à été crée', 'OK', this.snackConfig);
+  //       },
         
-        error => this.snackBar.open(error.error.message, 'OK', this.snackConfig)
-      );
-    } else {
-      this.snackBar.open('Renseigner les champs sans erreur.', 'OK', this.snackConfig);
-    }
+  //       error => this.snackBar.open(error.error.message, 'OK', this.snackConfig)
+  //     );
+  //   } else {
+  //     this.snackBar.open('Renseigner les champs sans erreur.', 'OK', this.snackConfig);
+  //   }
 
-  }
+  // }
 
 }

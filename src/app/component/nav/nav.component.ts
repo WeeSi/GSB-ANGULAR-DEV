@@ -56,20 +56,20 @@ export class NavComponent implements OnInit {
       {
         name: 'Utilisateurs',
         rout: '/users',
-        icon: 'person_circle',
+        icon: 'supervised_user_circle',
         role: ['Directeur', 'Admin']
       },
+      // {
+      //     name: 'Médecins',
+      //     rout: '/medecins',
+      //     icon: 'supervised_user_circle',
+      //     role: ['Commercial', 'Admin']
+      // },
       {
-          name: 'Médecins',
-          rout: '/medecins',
-          icon: 'supervised_user_circle',
-          role: ['Commercial', 'Admin']
-      },
-      {
-          name: 'Vendeurs',
-          rout: '/patients',
-          icon: 'group',
-          role: ['Commercial', 'Admin', 'Doctor', 'Comptable']
+          name: 'Prendre rendez-vous',
+          rout: '/commercials',
+          icon: 'calendar_today',
+          role: ['Commercial', 'Admin', 'Doctor']
       },
       {
           name: 'Médicaments',
@@ -79,35 +79,47 @@ export class NavComponent implements OnInit {
       },
       {
           name: 'Factures',
-          rout: '/prescriptions',
+          rout: '/bills',
           icon: 'assignment',
-          role: ['Commercial', 'Admin', 'Doctor', 'Comptable']
+          role: ['Admin', 'Comptable']
       },
-      {
-          name: 'Profil',
-          rout: '/profil',
-          icon: 'person',
-          role: ['Commercial', 'Admin', 'Doctor', 'Comptable']
-      }
   ];
 
-  ngOnInit() {
-    console.log(this.router.url);
-    this.userService.getUserMe().subscribe(user => this.UserDto.push(user));
-    this.role = this.roleService.getRole();
- 
+  navList1: navList[] = [
+  {
+    name: 'Mes rendez-vous',
+    rout: '/user/meetings',
+    icon: 'calendar_view_day',
+    role: ['Commercial', 'Admin', 'Doctor']
+  },
+  // {
+  //   name: 'Mes factures',
+  //   rout: '/user/bills',
+  //   icon: 'assignment',
+  //   role: ['Commercial', 'Admin', 'Doctor', 'Comptable']
+  // },
+  {
+    name: 'Mes médicaments',
+    rout: '/user/medicines',
+    icon: 'local_hospital',
+    role: ['Commercial', 'Admin', 'Doctor']
+  },
+  {
+    name: 'Profil',
+    rout: '/profil',
+    icon: 'person',
+    role: ['Commercial', 'Admin', 'Doctor', 'Comptable']
   }
 
+];
 
-
+  ngOnInit() {
+    this.userService.getUserMe().subscribe(user => this.UserDto.push(user));
+    this.role = this.roleService.getRole();
+  }
 
   logout() {
     this.authservice.logout();
-  }
-
-  reload() {
-    // tslint:disable-next-line: no-unused-expression
-    this.ngOnInit;
   }
 
 }
