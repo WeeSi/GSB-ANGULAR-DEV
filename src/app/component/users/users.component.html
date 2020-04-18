@@ -53,12 +53,13 @@
                 </thead>
                 <tbody>                                                                                          
                         <tr role="listitem" class="odd"  *ngFor="let list of displayedUsers; let lastlist = last"  >
-                            <td class="uid"><img style="    width: 41px;
+                            <td class="uid"><img *ngIf="list.image != ''" style="    width: 41px;
                               margin-right: 10px;
                               border-radius: 80px;
                               height: 41px;
                               object-fit: cover;" 
-                              src="http://localhost:3000/api/avatar/{{list.image}}">{{ list.email }}</td>
+                              src="http://localhost:3000/api/avatar/{{list.image}}">
+                              <ngx-avatar *ngIf="list.image == '' " name="{{list.firstName}} {{list.lastName}}"></ngx-avatar> {{ list.email }}</td>
                             <td class="uid">{{ list.firstName }}</td>
                             <td> <span class="name">{{ list.lastName }}</span></td>
                             <td> <span class="name">{{ list.address }}</span></td>

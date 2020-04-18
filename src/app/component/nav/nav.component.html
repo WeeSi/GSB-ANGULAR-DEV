@@ -15,7 +15,7 @@
       </mat-nav-list>
   </div>
   </mat-sidenav>
-  <mat-sidenav-content [ngClass]="{'overflow-hidden' : router.url.includes('commercial/user')}" *ngFor="let user of UserDto">
+  <mat-sidenav-content [ngClass]="{'overflow-hidden' : router.url.includes('commercial/user') || router.url.includes('/medicaments')}" *ngFor="let user of UserDto">
      
         <mat-toolbar color="primary">
           <div class="top_container">
@@ -36,6 +36,7 @@
           <div class="notifications">
           <div class="icons-container">
             <div style="padding: 20px">
+              
             <button [matMenuTriggerFor]="menu" class="power_out settings_icons"><mat-icon class="settings-icon">settings</mat-icon></button>
             <mat-menu #menu="matMenu">
               <button class="pointer" (click)="logout()" mat-menu-item>Se déconnecter</button>
@@ -43,7 +44,8 @@
             </div>
           </div>
             <div class="media">
-                  <img style="width: 35px;
+              <ngx-avatar class="my-nav-avatar" *ngIf="user.image == '' " name="{{user.firstName}} {{user.lastName}}"></ngx-avatar>
+                  <img *ngIf="user.image != '' " style="width: 35px;
                   border-radius: 80px;
                   height: 35px;
                   object-fit: cover;" class="user-img"  src="http://localhost:3000/api/avatar/{{user.image}}" alt="">

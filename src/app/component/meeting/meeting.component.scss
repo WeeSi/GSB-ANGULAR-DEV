@@ -1,0 +1,43 @@
+table {
+    width: 100%;
+  }
+
+  
+ .mat-header-cell, .mat-cell{
+    padding: 23px !important;
+    line-height: 1.42857143;
+    vertical-align: top;    
+    text-align: left;
+    border:none;
+    background: transparent;
+    font-weight: 600;
+}
+
+.mat-table{
+    font-family: "Poppins", sans-serif !important;
+}
+
+.mat-cell{
+    padding-top: 35px !important;
+    padding-bottom: 35px !important;
+    border-bottom: 2px solid #f4f6fa;
+    font-weight: 600;
+    font-size: 15px;
+    vertical-align: middle;
+}
+
+.mat-header-cell{
+    font-size: 12px;
+    text-transform: uppercase;
+    color:#b1b6bf;
+
+}
+
+.mat-header-cell:last-child{
+    border-bottom-right-radius: 10px;
+}
+
+.mat-header-cell:first-child{
+    color:#4d5765 !important;
+    border-bottom-left-radius: 10px;
+}

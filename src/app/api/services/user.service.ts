@@ -158,12 +158,26 @@ class UserService extends __BaseService {
   }
 
   /**
+   * @param params The `UserService.GetUserCommercialsParams` containing the following parameters:
+   *
+   * - `lastname`: Lastname to retrieve
+   *
+   * - `firstname`: Name to retrieve
+   *
+   * - `email`: Email to retrieve
+   *
+   * - `adresse`: role to retrieve
+   *
    * @return commercials found
    */
-  getUserCommercialsResponse(): __Observable<__StrictHttpResponse<Array<UserDto>>> {
+  getUserCommercialsResponse(params: UserService.GetUserCommercialsParams): __Observable<__StrictHttpResponse<Array<UserDto>>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
+    if (params.lastname != null) __params = __params.set('lastname', params.lastname.toString());
+    if (params.firstname != null) __params = __params.set('firstname', params.firstname.toString());
+    if (params.email != null) __params = __params.set('email', params.email.toString());
+    if (params.adresse != null) __params = __params.set('adresse', params.adresse.toString());
     let req = new HttpRequest<any>(
       'GET',
       this.rootUrl + `/user/commercials`,
@@ -182,10 +196,20 @@ class UserService extends __BaseService {
     );
   }
   /**
+   * @param params The `UserService.GetUserCommercialsParams` containing the following parameters:
+   *
+   * - `lastname`: Lastname to retrieve
+   *
+   * - `firstname`: Name to retrieve
+   *
+   * - `email`: Email to retrieve
+   *
+   * - `adresse`: role to retrieve
+   *
    * @return commercials found
    */
-  getUserCommercials(): __Observable<Array<UserDto>> {
-    return this.getUserCommercialsResponse().pipe(
+  getUserCommercials(params: UserService.GetUserCommercialsParams): __Observable<Array<UserDto>> {
+    return this.getUserCommercialsResponse(params).pipe(
       __map(_r => _r.body as Array<UserDto>)
     );
   }
@@ -414,6 +438,32 @@ module UserService {
      * Email to retrieve
      */
     email: string;
+  }
+
+  /**
+   * Parameters for getUserCommercials
+   */
+  export interface GetUserCommercialsParams {
+
+    /**
+     * Lastname to retrieve
+     */
+    lastname: string;
+
+    /**
+     * Name to retrieve
+     */
+    firstname: string;
+
+    /**
+     * Email to retrieve
+     */
+    email: string;
+
+    /**
+     * role to retrieve
+     */
+    adresse: string;
   }
 
   /**

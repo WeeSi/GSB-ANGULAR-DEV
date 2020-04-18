@@ -2,11 +2,10 @@
       <table  class="table table-striped dataTable no-footer" id="dtBasicExample" role="grid" aria-describedby="dtBasicExample_info">
         <thead>
             <tr role="row">
-                <th style=" width: 20px;" class="sorting" tabindex="0" aria-controls="dtBasicExample" rowspan="1" colspan="1" aria-label="Email: activate to sort column ascending">Numéro de la note de frais</th>
-                <th style=" width: 34px;" class="sorting" tabindex="0" aria-controls="dtBasicExample" rowspan="1" colspan="1" aria-label="ID: activate to sort column ascending">Date de la note de frais</th>
-                <th style=" width: 34px;" class="sorting" tabindex="0" aria-controls="dtBasicExample" rowspan="1" colspan="1" aria-label="ID: activate to sort column ascending">Prix de l'hotel</th>
-                <th style=" width: 48px;" class="sorting" tabindex="0" aria-controls="dtBasicExample" rowspan="1" colspan="1" aria-label="Email: activate to sort column ascending">Prix du repas</th>
-                <th style=" width: 62px;" class="sorting" tabindex="0" aria-controls="dtBasicExample" rowspan="1" colspan="1" aria-label="Email: activate to sort column ascending">Nombre de kilometre</th>
+                <th style=" width: 20px;" class="sorting" tabindex="0" aria-controls="dtBasicExample" rowspan="1" colspan="1" aria-label="Email: activate to sort column ascending">Numéro de la facture</th>
+                <th style=" width: 34px;" class="sorting" tabindex="0" aria-controls="dtBasicExample" rowspan="1" colspan="1" aria-label="ID: activate to sort column ascending">Date de la facture</th>
+                <th style=" width: 34px;" class="sorting" tabindex="0" aria-controls="dtBasicExample" rowspan="1" colspan="1" aria-label="ID: activate to sort column ascending">Commercial</th>
+                <th style=" width: 48px;" class="sorting" tabindex="0" aria-controls="dtBasicExample" rowspan="1" colspan="1" aria-label="Email: activate to sort column ascending">Docteur</th>
                 <th style=" width: 5px;" class="sorting" tabindex="0" aria-controls="dtBasicExample" rowspan="1" colspan="1" aria-label="Email: activate to sort column ascending"></th>
                 <!--  <th style="color: #757575; width: 261px;" class="sorting" tabindex="0" aria-controls="dtBasicExample" rowspan="1" colspan="1" aria-label="Email: activate to sort column ascending"></th>
                 <th style="color: #757575; width: 261px;" class="sorting" tabindex="0" aria-controls="dtBasicExample" rowspan="1" colspan="1" aria-label="Email: activate to sort column ascending"></th>
@@ -17,11 +16,14 @@
                 <tr role="listitem" class="odd"  *ngFor="let list of DisplayFactures; let lastlist = last"  >
                     <td class="uid">{{list.id}}</td>
                     <td class="uid">{{list.date}}</td>
-                    <td class="uid">{{list.prix_hotel}}€ </td>
-                    <td> <span class="name">{{ list.prix_repas }}€</span></td>
-                    <td> <span class="name">{{list.nombre_kilometre}}km</span></td>
-                    <td> <span class="name" (click)="seeFacture(list.id)" style="cursor: pointer;">
-                        <mat-icon>chevron_right</mat-icon></span></td>
+                    <td class="uid"></td>
+                    <td> <span class="name"></span></td>
+                    <td> <span class="name"  style="cursor: pointer;">
+                        <button [matMenuTriggerFor]="menu" style="cursor:pointer;background: none; box-shadow: none; border: none;"><mat-icon style="font-size: 20px; vertical-align: middle;">more_vert</mat-icon>  </button>
+            <mat-menu #menu="matMenu">
+                <button (click)="seeFacture(list.id)" class="pointer" mat-menu-item>Modifier</button>
+                <button (click)="deleteFacture(list.id)" class="pointer" mat-menu-item>Supprimer</button>
+              </mat-menu></span></td>
                   <!--  <td> <span class="name"></span><button mat-raised-button color="primary" [routerLink]="['/medecins/user', list.id ]">Voir</button></td>
                     <td> <span class="name"></span><button mat-raised-button color="warn" (click)="deleteUser(list.id)">Supprimer</button></td>-->
                 </tr>

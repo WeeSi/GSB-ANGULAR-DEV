@@ -42,7 +42,7 @@ export class SignupComponent implements OnInit {
       role: ['', Validators.required],
       gender: ['', Validators.required],
       adresse: ['', Validators.required],
-      image: ['',]
+      image: ['']
     });
    }
 

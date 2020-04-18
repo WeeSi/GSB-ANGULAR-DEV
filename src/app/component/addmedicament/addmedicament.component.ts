@@ -37,19 +37,20 @@ export class AddmedicamentComponent implements OnInit {
         description: ['', Validators.required],
         img: ['', Validators.required],
         commercial: [this.id, Validators.required],
-        prix: ['', Validators.required]
+        prix: ['', Validators.required],
+        categorie:['', Validators.required]
       });
     }
 
   ngOnInit() {
-
     this.id = this.roleService.getId();
     this.formInput = this.fb.group({
       nom: ['', Validators.required],
       description: ['', Validators.required],
       img: ['', Validators.required],
       commercial: [this.id, Validators.required],
-      prix: ['', Validators.required]
+      prix: ['', Validators.required],
+      categorie : ['', Validators.required],
     });
   }
 
@@ -78,7 +79,8 @@ export class AddmedicamentComponent implements OnInit {
         description: this.formInput.value.description,
         img: this.filename,
         commercial : this.id,
-        prix:this.formInput.value.prix
+        prix:this.formInput.value.prix,
+        categorie: this.formInput.value.categorie
       };
       this.medicamentService.putMedicaments(medToCreate).toPromise().then(
         () => {
@@ -88,7 +90,6 @@ export class AddmedicamentComponent implements OnInit {
             formData.append('file', this.fileToUpload, this.filename);
             this.http.post(this.url, formData)
               .subscribe(res => {
-                console.log(res);
               });
           }
           this.dialogRef.close();

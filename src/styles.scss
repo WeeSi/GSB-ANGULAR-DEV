@@ -36,6 +36,16 @@ $dark-theme: map_merge($dark-theme, (background: $background));
         background-color: #151419;
         border-right: none !important;
     }
+    .mat-table {
+        background: #1a1c20;
+        box-shadow: none;
+    }
+    td button mat-icon{
+        color:white;
+    }
+    th.mat-header-cell, td.mat-cell{
+        border:none !important;
+    }
     .tab-pane,.nav-tabs{
        background-color: #15171b !important;
     }
@@ -155,6 +165,9 @@ $dark-theme: map_merge($dark-theme, (background: $background));
     ::placeholder{
         color: white !important;
     }
+    .mat-paginator {
+        background: #1a1c20;
+    }
     
 }
   
@@ -214,6 +227,9 @@ $dark-theme: map_merge($dark-theme, (background: $background));
 
 .divider{
     background: rgb(211, 212, 223);
+}
+.medicinesCategorie{
+    color: #7d7d7d;
 }
 
 }
@@ -387,4 +403,20 @@ body { margin: 0; }
 
 button{
     outline: none !important;
+}
+
+ngx-avatar{
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.medicinesCategorie{
+    font-size: 20px;
+    font-weight: 500;
+    text-transform: capitalize;
+}
+
+.search-results {
+    height: 100%;
+    overflow: scroll;
 }

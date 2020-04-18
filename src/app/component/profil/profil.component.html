@@ -27,8 +27,8 @@
 
     <div class="media media_settings">
         <div class="user_img user_img_settings" href="#">
-        
-            <img class="user-img" style="width: 150px;height: 150px;border-radius: 90px;object-fit: cover;cursor: pointer;" [src]="url || 'http://localhost:3000/api/avatar/' + user.image" alt="">  
+            <ngx-avatar *ngIf="user.image == '' " name="{{user.firstName}} {{user.lastName}}"></ngx-avatar>
+            <img *ngIf="user.image != ''" class="user-img" style="width: 150px;height: 150px;border-radius: 90px;object-fit: cover;cursor: pointer;" [src]="url || 'http://localhost:3000/api/avatar/' + user.image" alt="">  
               <span class="user_settings_name">{{user.firstName}} {{user.lastName}}</span>   
             <label for="file" class="label-file" style="display: block;">Choisir une image</label>
            <input id="file" class="input-file" (change)="onSelectFile($event)" name="userprofile" type="file">

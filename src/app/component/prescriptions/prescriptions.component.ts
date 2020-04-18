@@ -15,6 +15,7 @@ import { ProfilComponent } from '../profil/profil.component';
 })
 export class PrescriptionsComponent implements OnInit {
   private role: any;
+  isShow = true;
 
   constructor(
               public navService:NavService,
@@ -46,6 +47,10 @@ export class PrescriptionsComponent implements OnInit {
     .subscribe(factures => this.FactureDto = factures);
     this.role = this.roleService.getRole();
     this.theme.setDefaultTheme();
+}
+
+toggleDisplay() {
+  this.isShow = !this.isShow;
 }
 
 }

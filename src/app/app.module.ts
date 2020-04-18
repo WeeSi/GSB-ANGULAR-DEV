@@ -58,7 +58,8 @@ import { SearchEnumComponent } from './component/search-enum/search-enum.compone
 import { MeetingComponent } from './component/meeting/meeting.component';
 import { BillComponent } from './component/bill/bill.component';
 import { MedicinesComponent } from './component/medicines/medicines.component';
-
+import { AvatarModule } from 'ngx-avatar';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 
 
@@ -96,6 +97,7 @@ import { MedicinesComponent } from './component/medicines/medicines.component';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    InfiniteScrollModule,
     MatButtonModule,
     MatMenuModule,
     MatToolbarModule,
@@ -121,6 +123,7 @@ import { MedicinesComponent } from './component/medicines/medicines.component';
     MatButtonToggleModule,
     MatDialogModule,
     MatSlideToggleModule,
+    AvatarModule,
     CookieModule.forRoot()
   ],
   providers: [NavService, SearchBarService, ApiService, SignupService,MatDatepickerModule,

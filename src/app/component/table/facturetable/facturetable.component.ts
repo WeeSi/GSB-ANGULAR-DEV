@@ -90,4 +90,9 @@ pageChange(event: PageEvent): void {
           this.ngOnInit();
          });
     }
+
+    deleteFacture(id){
+      this.factureService.deleteFacturesId(id).subscribe();
+      this.ngOnInit();
+    }
   }

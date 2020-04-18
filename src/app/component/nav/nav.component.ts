@@ -92,12 +92,12 @@ export class NavComponent implements OnInit {
     icon: 'calendar_view_day',
     role: ['Commercial', 'Admin', 'Doctor']
   },
-  // {
-  //   name: 'Mes factures',
-  //   rout: '/user/bills',
-  //   icon: 'assignment',
-  //   role: ['Commercial', 'Admin', 'Doctor', 'Comptable']
-  // },
+  {
+    name: 'Mes factures',
+    rout: '/user/bills',
+    icon: 'assignment',
+    role: ['Admin', 'Doctor', 'Comptable']
+  },
   {
     name: 'Mes médicaments',
     rout: '/user/medicines',
@@ -114,6 +114,7 @@ export class NavComponent implements OnInit {
 ];
 
   ngOnInit() {
+    console.log(this.router.url)
     this.userService.getUserMe().subscribe(user => this.UserDto.push(user));
     this.role = this.roleService.getRole();
   }

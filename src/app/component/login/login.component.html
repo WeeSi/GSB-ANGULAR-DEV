@@ -6,6 +6,8 @@
 
              <div class="left-side">
 
+                <div style=" width: 100%; max-width: 416px; margin: auto;">
+
                 <div class="logo-container">
                         <img class="logo-gsb" src="../assets/Logo-gsb.png" alt="">
                 </div>
@@ -14,35 +16,31 @@
 
                     <form [formGroup]="formInput"  >
                                 
-                            <div>
+                            <div style="margin-bottom:30px">
                                 <!--Identifiant-->
-                                <mat-form-field class="example-full-width">
-                                    
-                                    <input matInput placeholder="Email" autocomplete="off" formControlName="email">
-
-                                </mat-form-field>
+                                <div class="">
+                                    <label style="font-weight: bold;" class="settings_subtitle" for="lastname">Adresse Email</label>
+                                    <input class="form-control form_control" style="background:#f3f3f4" type="text" id="lastname" formControlName="email">
+                                </div>
                                 <!--Identifiant-->
 
                         </div>
 
                         <div>
-
-                                <!--Mot de passe-->
-                                <mat-form-field class="example-full-width">
-
-                                    <input matInput placeholder="Mot de passe" [type]="!hide ? 'password' : 'text'" autocomplete="new-password"  formControlName="password">
-
-                                    <!--bouton permettant le changement de la visibilité du mdp-->
-                                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                                    <div class="">
+                                        <label  style="font-weight: bold;" class="settings_subtitle" for="lastname">Mot de passe</label>
+                                        <div style="position: relative;">
+                                            <input style="padding-right: 40px;" [type]="!hide ? 'password' : 'text'" class="form-control form_control" style="background:#f3f3f4" id="password" formControlName="password">
+                                                                                                                    <!--bouton permettant le changement de la visibilité du mdp-->
+                                    <button style="position: absolute;top:0px;right: 0;" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                                         
                                         <!-- change le bouton en visible ou inversement-->
                                         <mat-icon >{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
 
                                     </button>
-                                    
-                                </mat-form-field>
-                         <!--Mot de passe-->
-                   
+                                        </div>
+                                       
+                                    </div>
                    </div>     
                 
 
@@ -56,7 +54,8 @@
                 </form>
 
             </div>
-
+                    
+        </div>
             <div class="right-side">
 
             </div>

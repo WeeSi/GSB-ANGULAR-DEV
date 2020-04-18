@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SearchBarService } from '../services/search-bar.service';
 import { UserService } from '../api/services/user.service';
 import { UserDto } from '../api/models/user-dto';
@@ -62,7 +62,8 @@ export class MedecinUserComponent implements OnInit {
                 private theme: ProfilComponent,
                 private formBuilder: FormBuilder,
                 private snackBar : MatSnackBar,
-                private meetingService : MeetingService
+                private meetingService : MeetingService,
+                private router: Router
                 ) { 
                 this.formGroup = this.formBuilder.group({
                  CalendarDate : ['', Validators.required],
@@ -141,6 +142,7 @@ export class MedecinUserComponent implements OnInit {
       this.meetingService.putMeeting(createMeetingDto).toPromise().then(
         () => {
           this.snackBar.open('Votre rdv a bien été pris en compte', 'OK', this.snackConfig);
+          this.router.navigate(['user/meetings']);
         },
         error => this.snackBar.open(error.error.message, 'OK', this.snackConfig)
       )

@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NavService } from '../../services/nav.service';
-import { ApiService } from 'src/app/services/api.service';
 import { RoleService } from 'src/app/services/role.service';
 import { MedicamentsService } from '../../api/services/medicaments.service';
 import { MedicamentDto } from 'src/app/api/models/medicament-dto';
@@ -27,13 +26,13 @@ export class MedicamentsComponent implements OnInit {
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
     pageIndex = 0;
-    pageSize = 5;
-    private role: any;
-    animal: string;
-    name: string;
+    pageSize = 10;
     search = '';
+    isShow = true;
     title = 'Medicaments';
+    myArray: { categorie: string; medicament: any; }[];
     public MedicamentDto: MedicamentDto[] = [];
+    private role: any;
     public MedicamentDtoById: MedicamentDto[] = [];
     snackConfig: MatSnackBarConfig = {duration: 100000};
     
@@ -75,35 +74,35 @@ export class MedicamentsComponent implements OnInit {
       this.role = this.roleService.getRole();
       console.log(this.role);
       this.theme.setDefaultTheme();
-      this.getBills();
-      this.getOrders();
-      
     }
 
     getMedicines(search: string): void {
       this.medicamentService.getMedicaments({pageIndex: this.pageIndex, pageSize: this.pageSize, search}).toPromise().then(
         paginatedMedicines => {
           this.MedicamentDto = paginatedMedicines.elements;
-          this.paginator.length = paginatedMedicines.nbElements;
+          const groups = this.MedicamentDto.reduce(function(obj,medicament){
+            obj[medicament.categorie] = obj[medicament.categorie] || [];
+            obj[medicament.categorie].push(medicament);
+            return obj;
+        }, {});
+        this.myArray = Object.keys(groups).map(function(key){
+            return {categorie: key, medicament: groups[key]};
+        });
         }
       );
+    }
+
+    onScroll(){
+      this.pageSize += 5;
+      this.getMedicines(this.search);      
     }
   
     pageChange(event: PageEvent): void {
       if (event.pageSize !== this.pageSize) {
         this.paginator.firstPage();
       }
-  
       this.pageIndex = this.paginator.pageIndex;
       this.pageSize = this.paginator.pageSize;
-  
-  
-      this.getMedicines(this.search);
-    }
-  
-    searchChanged(search: string) {
-      this.paginator.firstPage();
-      this.search = search;
       this.getMedicines(this.search);
     }
 
@@ -115,7 +114,7 @@ export class MedicamentsComponent implements OnInit {
       this.orderService.putOrder(CreatOrderDto).toPromise().then( () => {
         const createFactureDto : CreateFactureDto = {
           commercialId : 1,
-          date : "Tue Apr 14 2020",
+          date : new Date().toDateString(),
           doctor : this.roleService.getId(),
           orders : 1
         }
@@ -125,12 +124,8 @@ export class MedicamentsComponent implements OnInit {
       );
     }
 
-    getBills(){
-      this.factureService.getFacturesId(this.roleService.getId()).toPromise().then( userBills => console.log(userBills))   
-    }
-
-    getOrders(){
-      this.orderService.getOrderId(this.roleService.getId()).toPromise().then( userBills => console.log(userBills))   
+    toggleDisplay() {
+      this.isShow = !this.isShow;
     }
 
     ngOnDestroy() {

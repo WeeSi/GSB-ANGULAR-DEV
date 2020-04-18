@@ -3,3 +3,67 @@
     <h3 class="title-component">{{ title }}</h3>
      <button mat-flat-button color="primary" (click) = "toggleDisplay()" >	<mat-icon style="margin-right: 2px;font-size: 20px;">filter_list</mat-icon>Filtrer</button>
 </div>
+<div class="grid-container">
+<div class="contentFilter" [hidden] = "isShow"> 
+    <div class="filterSearch"> 
+      <label for="searchName">Date</label>
+      <app-search-bar  (input)="onSearchFirstnameChange($event.target.value)" class="search-bar" ngDefaultControl  name="searchTerm"></app-search-bar>
+    </div>
+    <div class="filterSearch">
+      <label for="searchName">Commercial</label>
+      <app-search-bar  (input)="onSearchLastnameChange($event.target.value)" class="search-bar" ngDefaultControl  name="searchTerm"></app-search-bar>
+    </div>
+    <div class="filterSearch">
+      <span>
+        <label for="role">Etat</label>
+        <a [matMenuTriggerFor]="menu" style="cursor: pointer;border:none" id="role" class="form-control"><span style="vertical-align: middle;">{{selectedRole}}</span></a> 
+        <mat-menu class="my-menu" #menu="matMenu">
+            <button   (click)="getSelected(-1)" class="pointer" mat-menu-item>Tout</button>
+            <button   (click)="getSelected(0)" class="pointer" mat-menu-item>Accepter</button>
+            <button   (click)="getSelected(1)" class="pointer" mat-menu-item>Refuser</button>
+          </mat-menu>
+    </span>
+    </div>
+  </div>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+  
+    <!-- Position Column -->
+    <ng-container matColumnDef="Date">
+      <th mat-header-cell *matHeaderCellDef> Date </th>
+      <td mat-cell *matCellDef="let element">Le {{element.date | date: 'dd/MM/yyyy'}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="Heure">
+      <th mat-header-cell *matHeaderCellDef> Heure </th>
+      <td mat-cell *matCellDef="let element"> {{element.hours}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="Commercial">
+      <th mat-header-cell *matHeaderCellDef> Commercial </th>
+      <td mat-cell *matCellDef="let element"> {{element.organizer.firstName}} {{element.organizer.lastName}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Etat">
+        <th mat-header-cell *matHeaderCellDef> Etat </th>
+        <td mat-cell *matCellDef="let element"> {{element.state}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Handle">
+        <th mat-header-cell *matHeaderCellDef> </th>
+        <td mat-cell *matCellDef="let element"><button [matMenuTriggerFor]="menu" style="cursor:pointer;background: none; box-shadow: none; border: none;"><mat-icon style="font-size: 20px; vertical-align: middle;">more_vert</mat-icon>  </button>
+            <mat-menu #menu="matMenu">
+                <button (click)="deleteMeeting(element.id)"class="pointer" mat-menu-item>Annuler</button>
+                <button (click)="accepteMeeting(element.id)" class="pointer" mat-menu-item>Accepter</button>
+                <button (click)="declineMeeting(element.id)" class="pointer" mat-menu-item>Refuser</button>
+              </mat-menu>
+            </td>
+      </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
