@@ -1,4 +1,4 @@
-<div style="height: 100%;" *ngIf="MedicamentDto != '' ">
+<div style="height: 100%;">
     <div
   class="search-results"
   infiniteScroll
@@ -19,16 +19,34 @@
   <div class="contentFilter" [hidden] = "isShow"> 
      <div class="filterSearch"> 
        <label for="searchName">Nom</label>
-       <app-search-bar  (input)="onSearchFirstnameChange($event.target.value)" class="search-bar" ngDefaultControl  name="searchTerm"></app-search-bar>
+       <app-search-bar  (input)="onSearchNameChange($event.target.value)" class="search-bar" ngDefaultControl  name="searchTerm"></app-search-bar>
      </div>
      <div class="filterSearch">
-       <label for="searchName">Categorie</label>
-       <app-search-bar  (input)="onSearchEmailChange($event.target.value)" ngDefaultControl  name="searchTerm"></app-search-bar>
-     </div>
-     <div class="filterSearch">
-       <label for="searchName">Commercial</label>
-       <app-search-bar  (input)="onSearchLastnameChange($event.target.value)" class="search-bar" ngDefaultControl  name="searchTerm"></app-search-bar>
-     </div>
+      <span>
+        <label for="categorie">Categorie</label>
+        <a [matMenuTriggerFor]="menu" style="cursor: pointer;border:none" id="categorie" class="form-control">
+          <span style="vertical-align: middle;">{{categorieSelected}}</span>
+        </a> 
+        <mat-menu class="my-menu" #menu="matMenu">
+          <button (click)="getSelected(-1, 'Tout')" class="pointer" mat-menu-item>Tout</button>
+            <button *ngFor="let categorie of CategorieDto" [value]="categorie.id" (click)="getSelected(categorie.id, categorie.categorie)" class="pointer" mat-menu-item>{{categorie.categorie}}</button>
+          </mat-menu>
+    </span>
+    </div>
+    <div class="filterSearch">
+      <span>
+        <label for="categorie">Commercial</label>
+        <a [matMenuTriggerFor]="menuCommercial" style="cursor: pointer;border:none" id="categorie" class="form-control">
+          <span style="vertical-align: middle;">{{commercialSelected}}</span>
+        </a> 
+
+        <mat-menu class="my-menu" #menuCommercial="matMenu">
+          <button (click)="getSelectedCommercial(-1, 'Tous')" class="pointer" mat-menu-item>Tous</button>
+            <button *ngFor="let commercial of UserDto" [value]="commercial.id" (click)="getSelectedCommercial(commercial.id, commercial.firstName.concat(' ').concat(commercial.lastName))" class="pointer" mat-menu-item>{{ commercial.firstName }} {{commercial.lastName}}</button>
+          </mat-menu>
+
+    </span>
+    </div>
    </div>
 
 <div class="med_style_container" style="margin-top: 30px;">
@@ -52,8 +70,8 @@
 </div>
 <div class="post-content-container">
   <div class="post-categories-container">
-    <div class="post-categories">
-      <a>{{list.prix}} €</a>
+    <div class="post-categories" style="margin-top:10px">
+      <a style="color: #00bcd4; font-weight: bold;">{{list.prix}} €</a>
     </div>
   </div> 
   <a  class="post-title">
@@ -61,12 +79,20 @@
   </a>
   <div class="post-meta">
     <div class="post-meta-content">
-      <button [matMenuTriggerFor]="menu"><mat-icon>more_horiz</mat-icon></button>
+      <button style="border: none; background: none; cursor: pointer; border: none; background: none; position: absolute; top: 0;" [matMenuTriggerFor]="menu"><mat-icon>more_horiz</mat-icon></button>
       <mat-menu #menu="matMenu">
-      <button  *ngIf="role === 'Commercial' || role === 'Admin'" (click)="deleteMedicament(list.id)" >Supprimer</button>
-      <button *ngIf="role === 'Commercial' || role === 'Admin'" (click)="openDialog(list.id)" style="margin-left:10px" >Modifier</button>
-      <button  *ngIf="role === 'Doctor' || role === 'Admin'" (click)="buyMedicine(list.id)" style="margin-left:10px" >Acheter</button>
+        <div>
+          <button class="pointer mat-menu-item" *ngIf="role === 'Commercial' || role === 'Admin'" (click)="deleteMedicament(list.id)" >Supprimer</button>
+        </div>
+        <div>
+          <button class="pointer mat-menu-item" *ngIf="role === 'Commercial' || role === 'Admin'" (click)="openDialog(list.id)"  >Modifier</button>
+        </div>
+        <div>
+          <button class="pointer mat-menu-item" *ngIf="role === 'Doctor' || role === 'Admin'" 
+          (click)="buyMedicine(list.id, list.categorie, list.img, list.nom, list.prix, list.commercialID)"  >Acheter</button>
+        </div>
     </mat-menu>
+    <button color="primary" mat-flat-button *ngIf="role === 'Doctor' || role === 'Admin'" (click)="buyMedicine(list.id, list.categorie, list.img, list.nom, list.prix, list.commercialID)"  >Acheter</button>
     </div>
     </div>
   </div>
@@ -79,7 +105,7 @@
 </div>
 </div>
 </div>
-<div *ngIf="MedicamentDto == '' ">
+<!-- <div *ngIf='MedicamentDto == ""' >
   <div style="height: 100%;
   display: flex;
   align-items: center;
@@ -93,4 +119,4 @@
    <button *ngIf="role === 'Admin' || role === 'Commercial' " class="add-button-alt" mat-flat-button color="primary" style="display: block;margin:auto" (click)="addMedicament()">Ajouter un médicament</button>
   </div>
   </div>
-</div>
+</div> -->

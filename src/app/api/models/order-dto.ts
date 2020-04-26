@@ -1,7 +1,11 @@
 /* tslint:disable */
-import { MedicamentDto } from './medicament-dto';
 export interface OrderDto {
   id: number;
-  medicine: MedicamentDto;
+  medicineCategorie: string;
+  medicineImg: string;
+  medicineName: string;
+  medicineNumber: number;
+  medicinePrice: number;
   quantity: number;
+  userOrder: number;
 }

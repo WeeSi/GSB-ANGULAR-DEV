@@ -7,31 +7,63 @@
 <div class="contentFilter" [hidden] = "isShow"> 
     <div class="filterSearch"> 
       <label for="searchName">Date</label>
-      <app-search-bar  (input)="onSearchFirstnameChange($event.target.value)" class="search-bar" ngDefaultControl  name="searchTerm"></app-search-bar>
+      <span> 
+        
+        <a (click)="picker.open()" class="form-control">
+          <mat-form-field style="opacity: 0; overflow: hidden; z-index: -1;" class="example-full-width">
+            <input matInput (dateChange)="onDate($event)" [matDatepicker]="picker">
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+          <span style="position: absolute; left: 0; padding: .375rem .75rem; height: 100%; top: 0; vertical-align: middle; line-height: 30px;">{{dateToString | date: 'dd/MM/yyyy'}}</span>
+          <mat-icon (click)="refreshDate()" *ngIf="dateToString != ''" class="close-date">close</mat-icon>
+        </a>
+      
+      </span>
     </div>
-    <div class="filterSearch">
-      <label for="searchName">Commercial</label>
-      <app-search-bar  (input)="onSearchLastnameChange($event.target.value)" class="search-bar" ngDefaultControl  name="searchTerm"></app-search-bar>
+    <div *ngIf="role == 'Doctor' || role == 'Admin' " class="filterSearch">
+      <span>
+        <label for="categorie">Commercial</label>
+        <a [matMenuTriggerFor]="menuCommercial" style="cursor: pointer;border:none" id="categorie" class="form-control">
+          <span style="vertical-align: middle;">{{commercialSelected}}</span>
+        </a> 
+
+        <mat-menu class="my-menu" #menuCommercial="matMenu">
+          <button (click)="getSelectedCommercial(-1, 'Tous')" class="pointer" mat-menu-item>Tous</button>
+            <button *ngFor="let commercial of CommercialDto" [value]="commercial.id" (click)="getSelectedCommercial(commercial.id, commercial.firstName.concat(' ').concat(commercial.lastName))" class="pointer" mat-menu-item>{{ commercial.firstName }} {{commercial.lastName}}</button>
+          </mat-menu>
+
+    </span>
+    </div>
+    <div *ngIf="role == 'Commercial' || role == 'Admin' " class="filterSearch">
+      <span>
+        <label for="categorie">Doctor</label>
+        <a [matMenuTriggerFor]="menuDoctor" style="cursor: pointer;border:none" id="categorie" class="form-control">
+          <span style="vertical-align: middle;">{{doctorSelected}}</span>
+        </a> 
+
+        <mat-menu class="my-menu" #menuDoctor="matMenu">
+          <button (click)="getSelectedDoctor(-1, 'Tous')" class="pointer" mat-menu-item>Tous</button>
+            <button *ngFor="let doctor of DoctorDto" [value]="doctor.id" (click)="getSelectedDoctor(doctor.id, doctor.firstName.concat(' ').concat(doctor.lastName))" class="pointer" mat-menu-item>{{ doctor.firstName }} {{doctor.lastName}}</button>
+          </mat-menu>
+
+    </span>
     </div>
     <div class="filterSearch">
       <span>
         <label for="role">Etat</label>
-        <a [matMenuTriggerFor]="menu" style="cursor: pointer;border:none" id="role" class="form-control"><span style="vertical-align: middle;">{{selectedRole}}</span></a> 
+        <a [matMenuTriggerFor]="menu" style="cursor: pointer;border:none" id="role" class="form-control"><span style="vertical-align: middle;">{{selectedState}}</span></a> 
         <mat-menu class="my-menu" #menu="matMenu">
-            <button   (click)="getSelected(-1)" class="pointer" mat-menu-item>Tout</button>
-            <button   (click)="getSelected(0)" class="pointer" mat-menu-item>Accepter</button>
-            <button   (click)="getSelected(1)" class="pointer" mat-menu-item>Refuser</button>
+            <button   (click)="getSelected(-1)" class="pointer" mat-menu-item>Tous</button>
+            <button   (click)="getSelected(2)" class="pointer" mat-menu-item>En attente</button>
+            <button   (click)="getSelected(1)" class="pointer" mat-menu-item>Accepté</button>
+            <button   (click)="getSelected(0)" class="pointer" mat-menu-item>Refuser</button>
           </mat-menu>
     </span>
     </div>
   </div>
 
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+<table *ngIf="role == 'Doctor'" mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
-    <!--- Note that these columns can be defined in any order.
-          The actual rendered columns are set as a property on the row definition" -->
-  
-    <!-- Position Column -->
     <ng-container matColumnDef="Date">
       <th mat-header-cell *matHeaderCellDef> Date </th>
       <td mat-cell *matCellDef="let element">Le {{element.date | date: 'dd/MM/yyyy'}} </td>
@@ -65,5 +97,85 @@
   
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <table *ngIf="role == 'Commercial'" mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="Date">
+      <th mat-header-cell *matHeaderCellDef> Date </th>
+      <td mat-cell *matCellDef="let element">Le {{element.date | date: 'dd/MM/yyyy'}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="Heure">
+      <th mat-header-cell *matHeaderCellDef> Heure </th>
+      <td mat-cell *matCellDef="let element"> {{element.hours}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="Doctor">
+      <th mat-header-cell *matHeaderCellDef> Doctor </th>
+      <td mat-cell *matCellDef="let element"> {{element.attendee.firstName}} {{element.attendee.lastName}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Etat">
+        <th mat-header-cell *matHeaderCellDef> Etat </th>
+        <td mat-cell *matCellDef="let element"> {{element.state}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Handle">
+        <th mat-header-cell *matHeaderCellDef> </th>
+        <td mat-cell *matCellDef="let element"><button [matMenuTriggerFor]="menu" style="cursor:pointer;background: none; box-shadow: none; border: none;"><mat-icon style="font-size: 20px; vertical-align: middle;">more_vert</mat-icon>  </button>
+            <mat-menu #menu="matMenu">
+                <button (click)="deleteMeeting(element.id)"class="pointer" mat-menu-item>Annuler</button>
+                <button (click)="accepteMeeting(element.id)" class="pointer" mat-menu-item>Accepter</button>
+                <button (click)="declineMeeting(element.id)" class="pointer" mat-menu-item>Refuser</button>
+              </mat-menu>
+            </td>
+      </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumnsDoctor"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumnsDoctor;"></tr>
+  </table>
+
+  
+  <table *ngIf="role == 'Admin'" mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="Date">
+      <th mat-header-cell *matHeaderCellDef> Date </th>
+      <td mat-cell *matCellDef="let element">Le {{element.date | date: 'dd/MM/yyyy'}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="Heure">
+      <th mat-header-cell *matHeaderCellDef> Heure </th>
+      <td mat-cell *matCellDef="let element"> {{element.hours}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="Doctor">
+      <th mat-header-cell *matHeaderCellDef> Doctor </th>
+      <td mat-cell *matCellDef="let element"> {{element.attendee.firstName}} {{element.attendee.lastName}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Commercial">
+      <th mat-header-cell *matHeaderCellDef> Commercial </th>
+      <td mat-cell *matCellDef="let element"> {{element.organizer.firstName}} {{element.organizer.lastName}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Etat">
+        <th mat-header-cell *matHeaderCellDef> Etat </th>
+        <td mat-cell *matCellDef="let element"> {{element.state}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Handle">
+        <th mat-header-cell *matHeaderCellDef> </th>
+        <td mat-cell *matCellDef="let element"><button [matMenuTriggerFor]="menu" style="cursor:pointer;background: none; box-shadow: none; border: none;"><mat-icon style="font-size: 20px; vertical-align: middle;">more_vert</mat-icon>  </button>
+            <mat-menu #menu="matMenu">
+                <button (click)="deleteMeeting(element.id)"class="pointer" mat-menu-item>Annuler</button>
+                <button (click)="accepteMeeting(element.id)" class="pointer" mat-menu-item>Accepter</button>
+                <button (click)="declineMeeting(element.id)" class="pointer" mat-menu-item>Refuser</button>
+              </mat-menu>
+            </td>
+      </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumnsAdmin"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumnsAdmin;"></tr>
   </table>
 </div>

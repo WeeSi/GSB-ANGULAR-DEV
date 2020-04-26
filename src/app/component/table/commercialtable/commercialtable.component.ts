@@ -29,16 +29,7 @@ displayedMedecins = []; // La liste qui est liée à la vue (celle qui est affic
 paginatorInfo: PageEvent = {pageSize: 5, pageIndex: 0, length: this.medecinsList.length}; // Les informations que l'on lie au paginateur
 
 ngOnInit() {
-// this.searchb.show();
-// tslint:disable-next-line: max-line-length
-this.userService.getUserCommercials().subscribe(doctors => {
-this.medecinsList = doctors as UserDto[],
-this.displayedMedecins = this.medecinsList;
-this.paginatorInfo.length = this.displayedMedecins.length;
-// this.displayedMedecins = this.paginateElements<UserDto>(this.medecinsList, this.paginatorInfo);
-// tslint:disable-next-line: max-line-length
-this.displayedMedecins = this.paginateElements<UserDto>(this.displayedMedecins, this.paginatorInfo); // On pagine nos éléments qui correspondent à la recherche
-});
+
 }
 
 // Méthode déclenchée lorsqu'une recherche est faite dans notre composant de recherche

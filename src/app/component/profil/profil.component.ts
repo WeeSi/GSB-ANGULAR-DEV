@@ -88,9 +88,9 @@ export class ProfilComponent implements OnInit {
         lastName: this.formUpdateCredential.value.lastname,
         address: this.formUpdateCredential.value.adresse
       };
-      this.userService.postUserId(this.formUpdateCredential.value).toPromise().then(
+      this.userService.postUserId({ id : this.roleService.getId(), UpdateUserDto: this.formUpdateCredential.value}).toPromise().then(
         () => {
-          this.snackBar.open('Votre compte à crée', 'OK', this.snackConfig);
+          this.snackBar.open('Votre à bien été modifié', 'OK', this.snackConfig);
           this.router.navigate(['profil']);
         },
         error => this.snackBar.open(error.error.message, 'OK', this.snackConfig)

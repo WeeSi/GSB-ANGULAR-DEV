@@ -16,6 +16,9 @@ import { ProfilComponent } from '../profil/profil.component';
 export class PrescriptionsComponent implements OnInit {
   private role: any;
   isShow = true;
+  doctor = -1;
+  date = "";
+  commercial = -1;
 
   constructor(
               public navService:NavService,
@@ -40,7 +43,7 @@ export class PrescriptionsComponent implements OnInit {
 
   ngOnInit() {
     this.navService.show();
-    this.factureService.getFactures().pipe(
+    this.factureService.getFactures({doctor : this.doctor, date : this.date, commercial : this.commercial }).pipe(
       map(response => response),
       tap(factures =>  factures)    // users array [Object, Object, Object]
     )

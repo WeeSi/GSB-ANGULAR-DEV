@@ -5,6 +5,7 @@ export { MedicamentDto } from './models/medicament-dto';
 export { UserDto } from './models/user-dto';
 export { UpdateUserDto } from './models/update-user-dto';
 export { PaginatedDto } from './models/paginated-dto';
+export { CategorieDto } from './models/categorie-dto';
 export { CreateMedicamentDto } from './models/create-medicament-dto';
 export { UpdateMedicamentDto } from './models/update-medicament-dto';
 export { FactureDto } from './models/facture-dto';

@@ -16,8 +16,8 @@
                 <tr role="listitem" class="odd"  *ngFor="let list of DisplayFactures; let lastlist = last"  >
                     <td class="uid">{{list.id}}</td>
                     <td class="uid">{{list.date}}</td>
-                    <td class="uid"></td>
-                    <td> <span class="name"></span></td>
+                    <td class="uid">{{list.commercialId.firstName}} {{list.commercialId.lastName}}</td>
+                    <td class="uid">{{list.doctor.firstName}} {{list.doctor.lastName}}</td>
                     <td> <span class="name"  style="cursor: pointer;">
                         <button [matMenuTriggerFor]="menu" style="cursor:pointer;background: none; box-shadow: none; border: none;"><mat-icon style="font-size: 20px; vertical-align: middle;">more_vert</mat-icon>  </button>
             <mat-menu #menu="matMenu">

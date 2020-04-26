@@ -10,6 +10,7 @@ import { map as __map, filter as __filter } from 'rxjs/operators';
 import { PaginatedDto } from '../models/paginated-dto';
 import { MedicamentDto } from '../models/medicament-dto';
 import { CreateMedicamentDto } from '../models/create-medicament-dto';
+import { CategorieDto } from '../models/categorie-dto';
 import { UpdateMedicamentDto } from '../models/update-medicament-dto';
 @Injectable({
   providedIn: 'root',
@@ -17,6 +18,7 @@ import { UpdateMedicamentDto } from '../models/update-medicament-dto';
 class MedicamentsService extends __BaseService {
   static readonly getMedicamentsPath = '/medicaments';
   static readonly putMedicamentsPath = '/medicaments';
+  static readonly getMedicamentsCategoriesPath = '/medicaments/categories';
   static readonly getMedicamentsIdPath = '/medicaments/{id}';
   static readonly postMedicamentsIdPath = '/medicaments/{id}';
   static readonly deleteMedicamentsIdPath = '/medicaments/{id}';
@@ -39,6 +41,10 @@ class MedicamentsService extends __BaseService {
    *
    * - `pageIndex`: Page index for pagination
    *
+   * - `commercial`: Commercial of medicine
+   *
+   * - `categorie`: Categorie of medicine
+   *
    * @return All medicaments
    */
   getMedicamentsResponse(params: MedicamentsService.GetMedicamentsParams): __Observable<__StrictHttpResponse<PaginatedDto>> {
@@ -48,6 +54,8 @@ class MedicamentsService extends __BaseService {
     if (params.search != null) __params = __params.set('search', params.search.toString());
     if (params.pageSize != null) __params = __params.set('pageSize', params.pageSize.toString());
     if (params.pageIndex != null) __params = __params.set('pageIndex', params.pageIndex.toString());
+    if (params.commercial != null) __params = __params.set('commercial', params.commercial.toString());
+    if (params.categorie != null) __params = __params.set('categorie', params.categorie.toString());
     let req = new HttpRequest<any>(
       'GET',
       this.rootUrl + `/medicaments`,
@@ -73,6 +81,10 @@ class MedicamentsService extends __BaseService {
    * - `pageSize`: Page size for pagination
    *
    * - `pageIndex`: Page index for pagination
+   *
+   * - `commercial`: Commercial of medicine
+   *
+   * - `categorie`: Categorie of medicine
    *
    * @return All medicaments
    */
@@ -115,6 +127,39 @@ class MedicamentsService extends __BaseService {
   putMedicaments(CreateMedicamentDto: CreateMedicamentDto): __Observable<MedicamentDto> {
     return this.putMedicamentsResponse(CreateMedicamentDto).pipe(
       __map(_r => _r.body as MedicamentDto)
+    );
+  }
+
+  /**
+   * @return All categories
+   */
+  getMedicamentsCategoriesResponse(): __Observable<__StrictHttpResponse<CategorieDto>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+    let req = new HttpRequest<any>(
+      'GET',
+      this.rootUrl + `/medicaments/categories`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<CategorieDto>;
+      })
+    );
+  }
+  /**
+   * @return All categories
+   */
+  getMedicamentsCategories(): __Observable<CategorieDto> {
+    return this.getMedicamentsCategoriesResponse().pipe(
+      __map(_r => _r.body as CategorieDto)
     );
   }
 
@@ -241,17 +286,26 @@ class MedicamentsService extends __BaseService {
   }
 
   /**
-   * @param id User id to retrieve
+   * @param params The `MedicamentsService.GetMedicamentsComIdParams` containing the following parameters:
+   *
+   * - `medicineName`: Medicine Name
+   *
+   * - `medicineCategorie`: Medicine Categorie
+   *
+   * - `id`: User id to retrieve
+   *
    * @return User found
    */
-  getMedicamentsComIdResponse(id: number): __Observable<__StrictHttpResponse<MedicamentDto>> {
+  getMedicamentsComIdResponse(params: MedicamentsService.GetMedicamentsComIdParams): __Observable<__StrictHttpResponse<MedicamentDto>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
+    if (params.medicineName != null) __params = __params.set('medicineName', params.medicineName.toString());
+    if (params.medicineCategorie != null) __params = __params.set('medicineCategorie', params.medicineCategorie.toString());
 
     let req = new HttpRequest<any>(
       'GET',
-      this.rootUrl + `/medicaments/com/${encodeURIComponent(id)}`,
+      this.rootUrl + `/medicaments/com/${encodeURIComponent(params.id)}`,
       __body,
       {
         headers: __headers,
@@ -267,11 +321,18 @@ class MedicamentsService extends __BaseService {
     );
   }
   /**
-   * @param id User id to retrieve
+   * @param params The `MedicamentsService.GetMedicamentsComIdParams` containing the following parameters:
+   *
+   * - `medicineName`: Medicine Name
+   *
+   * - `medicineCategorie`: Medicine Categorie
+   *
+   * - `id`: User id to retrieve
+   *
    * @return User found
    */
-  getMedicamentsComId(id: number): __Observable<MedicamentDto> {
-    return this.getMedicamentsComIdResponse(id).pipe(
+  getMedicamentsComId(params: MedicamentsService.GetMedicamentsComIdParams): __Observable<MedicamentDto> {
+    return this.getMedicamentsComIdResponse(params).pipe(
       __map(_r => _r.body as MedicamentDto)
     );
   }
@@ -350,6 +411,16 @@ module MedicamentsService {
      * Page index for pagination
      */
     pageIndex: number;
+
+    /**
+     * Commercial of medicine
+     */
+    commercial: number;
+
+    /**
+     * Categorie of medicine
+     */
+    categorie: string;
   }
 
   /**
@@ -367,6 +438,27 @@ module MedicamentsService {
      */
     UpdateUserDto: UpdateMedicamentDto;
     UpdateMedicamentDto: UpdateMedicamentDto;
+  }
+
+  /**
+   * Parameters for getMedicamentsComId
+   */
+  export interface GetMedicamentsComIdParams {
+
+    /**
+     * Medicine Name
+     */
+    medicineName: string;
+
+    /**
+     * Medicine Categorie
+     */
+    medicineCategorie: string;
+
+    /**
+     * User id to retrieve
+     */
+    id: number;
   }
 
   /**

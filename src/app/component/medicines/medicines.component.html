@@ -1,5 +1,50 @@
 <div class="top-div" >
 
     <h3 class="title-component">{{ title }}</h3>
-     <button mat-flat-button color="primary" (click) = "toggleDisplay()" >	<mat-icon style="margin-right: 2px;font-size: 20px;">filter_list</mat-icon>Filtrer</button>
 </div>
+
+<div class="med_style_container" style="margin-top: 30px;">
+
+  <div *ngFor="let i of myArray; let j = index">
+    <h4 class="medicinesCategorie">{{i.categorie}}</h4>
+<div>
+<div class="med_container" *ngFor="let list of i.medicament">
+  <div class="med">
+    <div class="med_thumbnail">
+      <div class="sh-ratio">
+        <div class="sh-ratio-container">
+  <div class="sh-ratio-content" [style.background-image]="'url(http://localhost:3000/api/avatar/' + list.medicineImg + ')'">
+  </div>
+</div>
+</div> 
+<a class="post-overlay">
+  <div class="post-overlay-content">
+  </div>
+</a>
+</div>
+<div class="post-content-container">
+  <div class="post-categories-container">
+    <div class="post-categories" style="margin-top:10px">
+      <a style="color: #00bcd4; font-weight: bold;">{{list.medicinePrice}} €</a>
+    </div>
+  </div> 
+  <a  class="post-title">
+    <p> {{list.medicineName}} </p>
+  </a>
+  <div class="post-meta">
+    <div class="post-meta-content">
+      <button style="border: none; background: none; cursor: pointer; border: none; background: none; position: absolute; top: 0;" [matMenuTriggerFor]="menu"><mat-icon>more_horiz</mat-icon></button>
+      <mat-menu #menu="matMenu">
+        <div>
+          <button class="pointer mat-menu-item" (click)="deleteMedicament(list.id)" >Supprimer</button>
+        </div>
+    </mat-menu>
+    </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+  

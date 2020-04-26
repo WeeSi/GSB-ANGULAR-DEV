@@ -67,7 +67,7 @@ a{
 }
 
 .right-side{
-    background-image: url("../../../assets/gif.gif");
+    background-image: url("../../../assets/background_login.png");
     width: 514px;
     background-repeat: no-repeat;
     background-size: cover;
@@ -85,7 +85,7 @@ a{
     top: 0;
     left: 0;
     z-index: -1;
-    background: #0a6f9f00;
+    background: #aed3e469;
 }
 
 .login-title{
@@ -232,6 +232,10 @@ mat-icon{
     -ms-transform: translateY(-50%);
     -o-transform: translateY(-50%);
     transform: translateY(-50%);
+}
+
+label{
+    font-size: 15px;
 }
 
 .txt1 {

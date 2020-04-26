@@ -14,6 +14,9 @@ import { CreateFactureDto } from 'src/app/api/models/create-facture-dto';
 import { OrderService } from 'src/app/api/services/order.service';
 import { CreatOrderDto } from 'src/app/api/models/creat-order-dto'
 import { MatSnackBarConfig, MatSnackBar} from '@angular/material/snack-bar';
+import { CategorieDto, UserDto } from 'src/app/api/models';
+import { UserService } from 'src/app/api/services/user.service';
+import { map, tap } from 'rxjs/operators';
 // tslint:disable-next-line: class-name
 
 @Component({
@@ -30,11 +33,18 @@ export class MedicamentsComponent implements OnInit {
     search = '';
     isShow = true;
     title = 'Medicaments';
+    categorieSelected="Tout";
+    commercialSelected = "Tous";
+    commercialIdSelected = -1;
     myArray: { categorie: string; medicament: any; }[];
-    public MedicamentDto: MedicamentDto[] = [];
+    private MedicamentDto: MedicamentDto[] = [];
+    private UserDto: UserDto[] = [];
     private role: any;
-    public MedicamentDtoById: MedicamentDto[] = [];
+    private userId;
+    private CategorieDto : CategorieDto[] = [];
+
     snackConfig: MatSnackBarConfig = {duration: 100000};
+
     
     constructor(public navService: NavService,
                 private factureService: FacturesService,
@@ -45,6 +55,7 @@ export class MedicamentsComponent implements OnInit {
                 private route:ActivatedRoute,
                 private theme: ProfilComponent ,
                 private orderService : OrderService,
+                private userService : UserService,
                 private snackBar : MatSnackBar) { }
 
      openDialog(id: any): void {
@@ -63,6 +74,11 @@ export class MedicamentsComponent implements OnInit {
       });
     }
 
+    getSelected(id, categorie){
+      this.categorieSelected = categorie;
+      this.getMedicines(this.search);
+    }
+
   deleteMedicament(id: number){
     this.medicamentService.deleteMedicamentsId(id).subscribe(res => this.ngOnInit());
     this.router.navigate(['/medicaments'],{relativeTo:this.route})
@@ -72,12 +88,15 @@ export class MedicamentsComponent implements OnInit {
     this.getMedicines(this.search);
       this.navService.show();
       this.role = this.roleService.getRole();
+      this.userId = this.roleService.getId();
       console.log(this.role);
       this.theme.setDefaultTheme();
+      this.getCategories();
+      this.getCommercials();
     }
 
     getMedicines(search: string): void {
-      this.medicamentService.getMedicaments({pageIndex: this.pageIndex, pageSize: this.pageSize, search}).toPromise().then(
+      this.medicamentService.getMedicaments({pageIndex: this.pageIndex, pageSize: this.pageSize, search, commercial : this.commercialIdSelected, categorie : this.categorieSelected}).toPromise().then(
         paginatedMedicines => {
           this.MedicamentDto = paginatedMedicines.elements;
           const groups = this.MedicamentDto.reduce(function(obj,medicament){
@@ -90,6 +109,32 @@ export class MedicamentsComponent implements OnInit {
         });
         }
       );
+    }
+
+    onSearchNameChange(searchName){
+      this.search = searchName;
+      this.getMedicines(this.search);
+    }
+
+    getCommercials(){
+      this.userService.getUserSelectCommercials().toPromise().then(
+        userCommercial => {this.UserDto = userCommercial}
+      )
+    }
+
+    getSelectedCommercial(id, commerical){
+      this.commercialIdSelected =  id;
+      this.commercialSelected = commerical;
+      this.getMedicines(this.search);
+    }
+
+
+    getCategories(){
+      this.medicamentService.getMedicamentsCategories().pipe(
+        map(response => response),
+        tap(categories =>  categories)
+      )
+      .subscribe(categories => {this.CategorieDto  = categories as unknown as CategorieDto[]});
     }
 
     onScroll(){
@@ -106,17 +151,22 @@ export class MedicamentsComponent implements OnInit {
       this.getMedicines(this.search);
     }
 
-    buyMedicine(id:number){
+    buyMedicine(medcineId:number, medicineCategorie:string, medicineImg : string, medicineName:string, medicinePrice:number, commercialId:number){
       const CreatOrderDto : CreatOrderDto = {
-        medicine : id,
-        quantity : 3
+        medicineCategorie : medicineCategorie,
+        medicineImg : medicineImg,
+        medicineName : medicineName,
+        medicineNumber : medcineId,
+        medicinePrice : medicinePrice,
+        quantity : 3,
+        userOrder : this.userId,
       }
       this.orderService.putOrder(CreatOrderDto).toPromise().then( () => {
         const createFactureDto : CreateFactureDto = {
-          commercialId : 1,
+          commercialId : commercialId,
           date : new Date().toDateString(),
           doctor : this.roleService.getId(),
-          orders : 1
+          orders : this.userId
         }
         this.factureService.putFactures(createFactureDto).toPromise().then( () => { (error: any) => console.log(error) } );
         this.snackBar.open('Le médicament à été commandé', 'OK', this.snackConfig);

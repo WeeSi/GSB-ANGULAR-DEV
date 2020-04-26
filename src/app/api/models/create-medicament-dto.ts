@@ -1,7 +1,7 @@
 /* tslint:disable */
 export interface CreateMedicamentDto {
   categorie: string;
-  commercial: number;
+  commercialID: number;
   description: string;
   img: string;
   nom: string;

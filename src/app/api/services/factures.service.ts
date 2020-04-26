@@ -29,12 +29,23 @@ class FacturesService extends __BaseService {
   }
 
   /**
+   * @param params The `FacturesService.GetFacturesParams` containing the following parameters:
+   *
+   * - `doctor`: Doctor to retrieve
+   *
+   * - `date`: Date to retrieve
+   *
+   * - `commercial`: Commercial to retrieve
+   *
    * @return All factures
    */
-  getFacturesResponse(): __Observable<__StrictHttpResponse<Array<FactureDto>>> {
+  getFacturesResponse(params: FacturesService.GetFacturesParams): __Observable<__StrictHttpResponse<Array<FactureDto>>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
+    if (params.doctor != null) __params = __params.set('doctor', params.doctor.toString());
+    if (params.date != null) __params = __params.set('date', params.date.toString());
+    if (params.commercial != null) __params = __params.set('commercial', params.commercial.toString());
     let req = new HttpRequest<any>(
       'GET',
       this.rootUrl + `/factures`,
@@ -53,10 +64,18 @@ class FacturesService extends __BaseService {
     );
   }
   /**
+   * @param params The `FacturesService.GetFacturesParams` containing the following parameters:
+   *
+   * - `doctor`: Doctor to retrieve
+   *
+   * - `date`: Date to retrieve
+   *
+   * - `commercial`: Commercial to retrieve
+   *
    * @return All factures
    */
-  getFactures(): __Observable<Array<FactureDto>> {
-    return this.getFacturesResponse().pipe(
+  getFactures(params: FacturesService.GetFacturesParams): __Observable<Array<FactureDto>> {
+    return this.getFacturesResponse(params).pipe(
       __map(_r => _r.body as Array<FactureDto>)
     );
   }
@@ -252,6 +271,27 @@ class FacturesService extends __BaseService {
 }
 
 module FacturesService {
+
+  /**
+   * Parameters for getFactures
+   */
+  export interface GetFacturesParams {
+
+    /**
+     * Doctor to retrieve
+     */
+    doctor: number;
+
+    /**
+     * Date to retrieve
+     */
+    date: string;
+
+    /**
+     * Commercial to retrieve
+     */
+    commercial: number;
+  }
 
   /**
    * Parameters for postFacturesId

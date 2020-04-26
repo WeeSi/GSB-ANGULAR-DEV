@@ -21,6 +21,9 @@ a{
 .form-row{
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-between;
+    margin-right:0 ;
+    margin-left: 0;
 }
 
 .form {
@@ -62,26 +65,29 @@ a{
     min-height: 100vh;
     display: block;
     background: $primary_background;
-    width: 660px;
-    padding: 70px 55px 0px;
-    
+    width: calc(100% - 514px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .logo-container{
     text-align: center;
     display: block;
-    position: absolute;
-    top: 10px;
-    right: 10px;
+    margin-bottom: 30px;
 }
 
 .logo-gsb{
     width: 80px;
 }
 
+label{
+    font-size: 15px;
+}
+
 .right-side{
-    background-image: url("../../../assets/signup.gif");
-    width: calc(100% - 660px);
+    background-image: url("../../../assets/background_signup.jpg");
+    width: 514px;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -98,22 +104,19 @@ a{
     top: 0;
     left: 0;
     z-index: -1;
-    background: #23232342;
+    background: #aed3e469;
 }
 
 .login-title{
     width: 100%;
     display: block;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 700;
-    font-size: 26px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-size: 30px;
     color: #333;
     line-height: 1.2;
-    text-align: left;
-    padding-bottom: 60px;
-    padding-left: 15px;
-    padding-right: 15px;
-    padding-top: 15px;
+    text-align: center;
+    padding-bottom: 73px;
 }
 
 
@@ -141,11 +144,14 @@ a{
 
 .loggin-button{
     font-family: 'Poppins', sans-serif;
+    width: $full_width;
     cursor: pointer;
     background: $primary_accent;
+    text-transform: uppercase;
     color: white;
-    padding: 15px 100px 15px 100px;
-    border-radius: 10px;
+    padding: 10px 16px;
+    font-size: 14px;
+    border-radius: 8px;
     border:none;
     box-shadow: 0 10px 30px 0px rgba(0, 178, 220, 0.47);
     -moz-box-shadow: 0 10px 30px 0px rgba(0, 178, 220, 0.47);
@@ -154,12 +160,13 @@ a{
     -ms-box-shadow: 0 10px 30px 0px rgba(0, 178, 220, 0.47);
     transition: all .4s;
     outline: none;
+    max-width: 200px;
 }
 
 .cancel-button{
     background: #ff1313;
     margin-right: 10px;
-    padding: 15px;
+    padding: 10px 16px;
     box-shadow: 0 10px 30px 0px rgba(249, 23, 23, 0.26);
     -moz-box-shadow: 0 10px 30px 0px rgba(26, 15, 15, 0.26);
     -webkit-box-shadow: 0 10px 30px 0px rgba(247, 24, 25, 0.26);
@@ -287,4 +294,15 @@ mat-icon{
     -webkit-box-shadow: 0 10px 30px 0px rgba(197, 84, 138, 0.59);
     -o-box-shadow: 0 10px 30px 0px rgba(0, 178, 220, 0.47);
     -ms-box-shadow: 0 10px 30px 0px rgba(0, 178, 220, 0.47);
+}
+
+.uploadProfile{
+    padding: 7px;
+    background: #00b2dc;
+    color: white;
+    border-radius: 10px;
+    font-size: 14px;
+    cursor: pointer;
+    width: 100%;
+    text-align: center;
 }

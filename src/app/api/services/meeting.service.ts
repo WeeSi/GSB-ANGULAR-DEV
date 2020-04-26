@@ -28,17 +28,32 @@ class MeetingService extends __BaseService {
   }
 
   /**
-   * @param id undefined
+   * @param params The `MeetingService.GetMeetingIdParams` containing the following parameters:
+   *
+   * - `state`: state to retrieve
+   *
+   * - `id`:
+   *
+   * - `doctor`: doctor to retrieve
+   *
+   * - `date`: date to retrieve
+   *
+   * - `commercial`: commercial to retrieve
+   *
    * @return User meetings
    */
-  getMeetingIdResponse(id: number): __Observable<__StrictHttpResponse<Array<MeetingDto>>> {
+  getMeetingIdResponse(params: MeetingService.GetMeetingIdParams): __Observable<__StrictHttpResponse<Array<MeetingDto>>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
+    if (params.state != null) __params = __params.set('state', params.state.toString());
 
+    if (params.doctor != null) __params = __params.set('doctor', params.doctor.toString());
+    if (params.date != null) __params = __params.set('date', params.date.toString());
+    if (params.commercial != null) __params = __params.set('commercial', params.commercial.toString());
     let req = new HttpRequest<any>(
       'GET',
-      this.rootUrl + `/meeting/${encodeURIComponent(id)}`,
+      this.rootUrl + `/meeting/${encodeURIComponent(params.id)}`,
       __body,
       {
         headers: __headers,
@@ -54,11 +69,22 @@ class MeetingService extends __BaseService {
     );
   }
   /**
-   * @param id undefined
+   * @param params The `MeetingService.GetMeetingIdParams` containing the following parameters:
+   *
+   * - `state`: state to retrieve
+   *
+   * - `id`:
+   *
+   * - `doctor`: doctor to retrieve
+   *
+   * - `date`: date to retrieve
+   *
+   * - `commercial`: commercial to retrieve
+   *
    * @return User meetings
    */
-  getMeetingId(id: number): __Observable<Array<MeetingDto>> {
-    return this.getMeetingIdResponse(id).pipe(
+  getMeetingId(params: MeetingService.GetMeetingIdParams): __Observable<Array<MeetingDto>> {
+    return this.getMeetingIdResponse(params).pipe(
       __map(_r => _r.body as Array<MeetingDto>)
     );
   }
@@ -220,6 +246,33 @@ class MeetingService extends __BaseService {
 }
 
 module MeetingService {
+
+  /**
+   * Parameters for getMeetingId
+   */
+  export interface GetMeetingIdParams {
+
+    /**
+     * state to retrieve
+     */
+    state: number;
+    id: number;
+
+    /**
+     * doctor to retrieve
+     */
+    doctor: number;
+
+    /**
+     * date to retrieve
+     */
+    date: string;
+
+    /**
+     * commercial to retrieve
+     */
+    commercial: number;
+  }
 
   /**
    * Parameters for getMeetingSearchDateId

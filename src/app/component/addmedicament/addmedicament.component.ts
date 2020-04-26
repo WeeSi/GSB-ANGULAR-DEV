@@ -78,7 +78,7 @@ export class AddmedicamentComponent implements OnInit {
         nom: this.formInput.value.nom,
         description: this.formInput.value.description,
         img: this.filename,
-        commercial : this.id,
+        commercialID : this.id,
         prix:this.formInput.value.prix,
         categorie: this.formInput.value.categorie
       };

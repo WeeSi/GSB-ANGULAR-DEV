@@ -18,6 +18,7 @@ class UserService extends __BaseService {
   static readonly putUserPath = '/user';
   static readonly getUserMePath = '/user/me';
   static readonly getUserCommercialsPath = '/user/commercials';
+  static readonly getUserSelectCommercialsPath = '/user/select/commercials';
   static readonly getUserDoctorsPath = '/user/doctors';
   static readonly getUserIdPath = '/user/{id}';
   static readonly postUserIdPath = '/user/{id}';
@@ -210,6 +211,39 @@ class UserService extends __BaseService {
    */
   getUserCommercials(params: UserService.GetUserCommercialsParams): __Observable<Array<UserDto>> {
     return this.getUserCommercialsResponse(params).pipe(
+      __map(_r => _r.body as Array<UserDto>)
+    );
+  }
+
+  /**
+   * @return commercials found
+   */
+  getUserSelectCommercialsResponse(): __Observable<__StrictHttpResponse<Array<UserDto>>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+    let req = new HttpRequest<any>(
+      'GET',
+      this.rootUrl + `/user/select/commercials`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<Array<UserDto>>;
+      })
+    );
+  }
+  /**
+   * @return commercials found
+   */
+  getUserSelectCommercials(): __Observable<Array<UserDto>> {
+    return this.getUserSelectCommercialsResponse().pipe(
       __map(_r => _r.body as Array<UserDto>)
     );
   }

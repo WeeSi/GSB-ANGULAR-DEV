@@ -18,6 +18,10 @@ import { UpdatefactureComponent } from '../updatefacture/updatefacture.component
 })
 export class FacturetableComponent implements OnInit {
 
+  doctor = -1;
+  date = "";
+  commercial = -1;
+
     constructor(
                   public searchb: SearchBarService,
                   private router: Router,
@@ -30,9 +34,10 @@ export class FacturetableComponent implements OnInit {
   paginatorInfo: PageEvent = {pageSize: 5, pageIndex: 0, length: this.Factures.length};
 
   ngOnInit() {
-    this.factureService.getFactures().subscribe(users => {
+    this.factureService.getFactures({doctor : this.doctor, date : this.date, commercial : this.commercial }).subscribe(users => {
       this.Factures = users as FactureDto[],
       this.DisplayFactures = this.Factures;
+      console.log(this.Factures)
       this.paginatorInfo.length = this.DisplayFactures.length;
       // this.displayedUsers = this.paginateElements<UserDto>(this.Users, this.paginatorInfo);
       // tslint:disable-next-line: max-line-length
