@@ -15,20 +15,20 @@ import { RoleService } from '../../services/role.service';
 })
 export class AddmedicamentComponent implements OnInit {
 
-  private url = 'http://localhost:3000/api/avatar';
+  public url = 'http://localhost:3000/api/avatar';
   formInput: FormGroup;
   fileToUpload: File = null;
   filename: string;
   snackConfig: MatSnackBarConfig = {duration: 100000};
-  private url_image:any;
-  private id:number;
+  public url_image:any;
+  public id:number;
 
   constructor(public dialogRef: MatDialogRef<AddmedicamentComponent>,
-    private fb: FormBuilder,
-    private http: HttpClient,
-    private medicamentService: MedicamentsService,
-    private snackBar: MatSnackBar,
-    private roleService : RoleService,
+    public fb: FormBuilder,
+    public http: HttpClient,
+    public medicamentService: MedicamentsService,
+    public snackBar: MatSnackBar,
+    public roleService : RoleService,
     @Inject(MAT_DIALOG_DATA) public data: any
     ) 
     { 

@@ -92,4 +92,8 @@ export class SignupComponent implements OnInit {
     GoBack() {
       this.location.back();
     }
+
+    onSelectFile(event){
+
+    }
 }

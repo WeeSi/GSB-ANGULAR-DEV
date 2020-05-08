@@ -27,11 +27,11 @@
               <label for="role">Rôle</label>
               <a [matMenuTriggerFor]="menu" style="cursor: pointer;border:none" id="role" class="form-control"><span style="vertical-align: middle;">{{selectedRole}}</span></a> 
               <mat-menu class="my-menu" #menu="matMenu">
-                  <button  [value]="Tout" (click)="getSelected(-1)" class="pointer" mat-menu-item>Tout</button>
-                  <button  [value]="Admin" (click)="getSelected(0)" class="pointer" mat-menu-item>Admin</button>
-                  <button  [value]="Doctor" (click)="getSelected(1)" class="pointer" mat-menu-item>Doctor</button>
-                  <button  [value]="Comptable" (click)="getSelected(2)" class="pointer" mat-menu-item>Comptable</button>
-                  <button  [value]="Commercial" (click)="getSelected(3)" class="pointer" mat-menu-item>Commercial</button>
+                  <button (click)="getSelected(-1)" class="pointer" mat-menu-item>Tous</button>
+                  <button (click)="getSelected(0)" class="pointer" mat-menu-item>Admin</button>
+                  <button (click)="getSelected(1)" class="pointer" mat-menu-item>Doctor</button>
+                  <button (click)="getSelected(2)" class="pointer" mat-menu-item>Comptable</button>
+                  <button (click)="getSelected(3)" class="pointer" mat-menu-item>Commercial</button>
                 </mat-menu>
           </span>
           </div>

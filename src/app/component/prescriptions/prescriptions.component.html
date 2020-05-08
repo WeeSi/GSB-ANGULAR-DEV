@@ -1,4 +1,4 @@
-<div *ngIf="FactureDto != '' ">
+<div *ngIf="FactureDto ">
     <div class="top-div" ><h3 class="title-component">{{ title }}</h3>  <button mat-flat-button color="primary" (click) = "toggleDisplay()" >	<mat-icon style="margin-right: 2px;font-size: 20px;">filter_list</mat-icon>Filtrer</button></div>
     <div class="grid-container">
         <div class="tablecontent">
@@ -22,7 +22,7 @@
 </div>
 
 
-<div *ngIf="FactureDto == '' ">
+<div *ngIf="!FactureDto ">
     <div style="height: 100%;
     display: flex;
     align-items: center;

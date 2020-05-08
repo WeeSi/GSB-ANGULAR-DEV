@@ -22,7 +22,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import { MatDialogModule, MAT_DATE_LOCALE } from '@angular/material';
 import { UpdateMedicamentDialog } from './component/updateMedicamentDialog/updateMedicamentDialog.component';
-import { DatePipe } from '@angular/common';
+import { DatePipe,
+  LocationStrategy, HashLocationStrategy } from '@angular/common';
 
 // import { TinyCalendar } from 'angular-tiny-calendar';
 // import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
@@ -128,6 +129,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
   ],
   providers: [NavService, SearchBarService, ApiService, SignupService,MatDatepickerModule,
               RoleService,ProfilComponent,DatePipe,
+              {provide: LocationStrategy, useClass: HashLocationStrategy},
           {
             provide: HTTP_INTERCEPTORS, 
             useClass: TokenInterceptorService,

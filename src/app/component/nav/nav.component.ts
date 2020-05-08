@@ -44,7 +44,7 @@ export class NavComponent implements OnInit {
     );
 
     public UserDto: UserDto[] = [];
-    private role: any;
+    public role: any;
 
     navList: navList[] = [
       // {

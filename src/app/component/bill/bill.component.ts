@@ -35,6 +35,14 @@ displayedColumns: string[] = ['number', 'date', 'commercial'];
     )
   }
 
+  onSearchFirstnameChange(event){
+
+  }
+
+  onSearchEmailChange(event){
+
+  }
+
   
   toggleDisplay() {
     this.isShow = !this.isShow;

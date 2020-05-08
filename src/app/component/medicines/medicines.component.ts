@@ -39,4 +39,8 @@ export class MedicinesComponent implements OnInit {
     )
   }
 
+  deleteMedicament(e){
+
+  }
+
 }

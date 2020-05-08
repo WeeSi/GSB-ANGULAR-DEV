@@ -27,7 +27,7 @@ export class ProfilComponent implements OnInit {
 
   id: number;
 
-  private UserDto: UserDto[] = [];
+  public UserDto: UserDto[] = [];
 
   snackConfig: MatSnackBarConfig = {duration: 100000};
 

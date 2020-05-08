@@ -13,9 +13,9 @@ import { RoleService } from 'src/app/services/role.service';
   styleUrls: ['./updatefacture.component.scss']
 })
 export class UpdatefactureComponent implements OnInit {
-  private Facture: FactureDto[] = [];
-  private formInput: FormGroup;
-  private role: string;
+  public Facture: FactureDto[] = [];
+  public formInput: FormGroup;
+  public role: string;
   date:string;
   constructor(
               private factureService:FacturesService,
@@ -38,6 +38,10 @@ export class UpdatefactureComponent implements OnInit {
     .subscribe(factures => {this.Facture.push(factures), this.date = factures.date});
     this.role = this.roleService.getRole();        
    
+  }
+
+  add(){
+    
   }
 
 }

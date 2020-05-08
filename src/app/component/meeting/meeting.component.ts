@@ -24,10 +24,10 @@ export class MeetingComponent implements OnInit {
   commercialIdSelected = -1;
   doctorSelected = "Tous";
   doctorIdSelected = -1;
-  private CommercialDto : UserDto[] = [];
-  private DoctorDto : UserDto[] = [];
-  private Mettings:MeetingDto[] = [];
-  private role;
+  public CommercialDto : UserDto[] = [];
+  public DoctorDto : UserDto[] = [];
+  public Mettings:MeetingDto[] = [];
+  public role: any;
   dataSource: MeetingDto[];
   displayedColumns: string[] = ['Date', 'Heure', 'Commercial','Etat','Handle'];
   displayedColumnsDoctor: string[] = ['Date', 'Heure', 'Doctor', 'Etat','Handle'];

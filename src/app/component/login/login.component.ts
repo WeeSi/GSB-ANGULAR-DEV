@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit {
 
   formInput: FormGroup;
   snackConfig: MatSnackBarConfig = {duration: 2000};
+  hide:any;
 
   constructor(private router: Router,
               private formBuilder: FormBuilder,

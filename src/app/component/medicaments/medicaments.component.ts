@@ -37,11 +37,11 @@ export class MedicamentsComponent implements OnInit {
     commercialSelected = "Tous";
     commercialIdSelected = -1;
     myArray: { categorie: string; medicament: any; }[];
-    private MedicamentDto: MedicamentDto[] = [];
-    private UserDto: UserDto[] = [];
-    private role: any;
-    private userId;
-    private CategorieDto : CategorieDto[] = [];
+    public MedicamentDto: MedicamentDto[] = [];
+    public UserDto: UserDto[] = [];
+    public role: any;
+    public userId;
+    public CategorieDto : CategorieDto[] = [];
 
     snackConfig: MatSnackBarConfig = {duration: 100000};
 

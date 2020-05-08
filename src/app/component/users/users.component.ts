@@ -60,7 +60,7 @@ export class UsersComponent implements OnInit {
     this.selectRole = role;
     this.getUsers();
     switch(role){
-      case -1  : this.selectedRole = 'Tout';
+      case -1  : this.selectedRole = 'Tous';
                 break;
       case  0  : this.selectedRole = 'Admin';
                 break;

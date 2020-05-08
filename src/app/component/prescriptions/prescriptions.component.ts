@@ -14,7 +14,7 @@ import { ProfilComponent } from '../profil/profil.component';
   styleUrls: ['./prescriptions.component.scss']
 })
 export class PrescriptionsComponent implements OnInit {
-  private role: any;
+  public role: any;
   isShow = true;
   doctor = -1;
   date = "";
@@ -30,7 +30,7 @@ export class PrescriptionsComponent implements OnInit {
 
               title = "Factures";
 
-  private FactureDto: FactureDto[] = [];
+  public FactureDto: FactureDto[] = [];
 
   addFacture(): void {
     const dialogRef = this.dialog.open(AddFactureComponent, {
@@ -54,6 +54,18 @@ export class PrescriptionsComponent implements OnInit {
 
 toggleDisplay() {
   this.isShow = !this.isShow;
+}
+
+onSearchFirstnameChange(event ){
+
+}
+
+onSearchEmailChange(event){
+
+}
+
+onSearchLastnameChange(event){
+
 }
 
 }

@@ -21,7 +21,7 @@ export class FicheUserComponent implements OnInit {
     private theme : ProfilComponent
   ) { }
 
-  private role: any;
+  public role: any;
   UserDto: UserDto[] = [];
   User: UserDto[] = [];
 
@@ -39,6 +39,11 @@ export class FicheUserComponent implements OnInit {
       this.userService.deleteUserId(params.id).subscribe();
       this.router.navigateByUrl('/users');
     });
+  }
+
+
+  UpdateCredential(){
+    
   }
 
 }
