@@ -129,7 +129,6 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
   ],
   providers: [NavService, SearchBarService, ApiService, SignupService,MatDatepickerModule,
               RoleService,ProfilComponent,DatePipe,
-              {provide: LocationStrategy, useClass: HashLocationStrategy},
           {
             provide: HTTP_INTERCEPTORS, 
             useClass: TokenInterceptorService,
